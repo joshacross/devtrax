@@ -81,7 +81,7 @@
                 <div class="nav-wrapper green lighten-1">
                     <form>
                         <div class="input-field">
-                            <input id="search" type="search" required>
+                            <input id="search" type="search" onkeyup="searchBar()" required>
                             <label class="label-icon" for="search"><i
                                     class="material-icons">search</i></label>
                             <i class="material-icons">close</i>
@@ -90,7 +90,7 @@
                 </div>
             </nav>
 
-            <!-- compose new contract floater -->
+        <!-- compose new contract floater -->
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large red">
                     <i class="large material-icons">mode_edit</i>
@@ -112,15 +112,15 @@
             <br><br>
             <main style="padding-bottom: 30%;">
                 <!-- card container -->
-                <div class="container">
+                <div class="container" id="card-container">
                     <div class="row">
 
                         <!-- card start-->
                         <!-- NOTE: use handlebars here to dynamically add content to page from user data -->
-                            <div class="col s12 m6 l4">
+                            <div class="col s12 m6 l6 contract-card" id='contract-card-1'>
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
-                                        <span class="card-title">Client Name - Project Name</span>
+                                        <span class="card-title">Test Client Name - Project Name</span>
                                         <div class="row">
                                             <div class="col s6">Contract Dates:</div>
                                             <div class="col s6" id="contract-dates">1/1/2021 - 1/31/2021</div>
@@ -145,7 +145,7 @@
                             </div>
                         <!-- card end-->
                         <!-- card start-->
-                            <div class="col s12 m6 l4">
+                            <div class="col s12 m6 l6 contract-card">
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
                                         <span class="card-title">Client Name - Project Name</span>
@@ -176,7 +176,7 @@
                             </div>
                         <!-- card end-->
                         <!-- card start-->
-                            <div class="col s12 m6 l4">
+                            <div class="col s12 m6 l6 contract-card">
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
                                         <span class="card-title">Client Name - Project Name</span>
@@ -207,7 +207,7 @@
                             </div>
                         <!-- card end-->
                         <!-- card start-->
-                            <div class="col s12 m6 l4">
+                            <div class="col s12 m6 l6 contract-card">
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
                                         <span class="card-title">Client Name - Project Name</span>
@@ -238,7 +238,7 @@
                             </div>
                         <!-- card end-->
                         <!-- card start-->
-                            <div class="col s12 m6 l4">
+                            <div class="col s12 m6 l6 contract-card">
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
                                         <span class="card-title">Client Name - Project Name</span>
@@ -280,7 +280,7 @@
     <footer class="page-footer green">
         <div class="container">
             <div class="row">
-                <div class="col l6 s12">
+                <div class="col l6 contract-card s12">
                     <h5 class="white-text">Company Info</h5>
                     <p class="grey-text text-lighten-4">We are a team of
                         college students working on this project like
