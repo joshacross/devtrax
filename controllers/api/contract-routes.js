@@ -87,7 +87,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.contract('/', (req, res) => {
+router.post('/', (req, res) => {
     // expects title, contract_url, user_id
     Contract.create({
         title: req.body.title,
@@ -101,6 +101,7 @@ router.contract('/', (req, res) => {
     });
 });
 
+// Script could be used
 // // Put /api/contracts/upvote
 // router.put('/upvote', (req, res) => {
 //     // custom static method created in models/Post.js
