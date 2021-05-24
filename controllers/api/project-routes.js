@@ -1,14 +1,14 @@
 const router = require('express').Router();
-const { Contract, User } = require('../../models');
+const { Project, User } = require('../../models');
 const sequelize = require('../../config/connection');
 
 // get all users
 router.get('/', (req, res) => {
-    Contract.findAll({
+    Project.findAll({
         // define attributes
         attributes: [
             'id', 
-            'contract_url', 
+            'project_url', 
             'title', 
             'created_at'
             // [
@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
             //     'vote_count'
             // ]
         ],
-        // order contracts based on the most recent created_at date
+        // order projects based on the most recent created_at date
         order: [['created_at', 'DESC']],
         // JOIN to the user table using include
         include: [
             //include comment model
             {
               model: Comment,
-              attributes: ['id', 'comment_text', 'contract_id', 'user_id', 'created_at'],
+              attributes: ['id', 'comment_text', 'project_id', 'user_id', 'created_at'],
               include: {
                 model: User,
                 attributes: ['username']
@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
             }
         ]
     })
-    .then(dbContractData => res.json(dbContractData))
+    .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -44,13 +44,13 @@ router.get('/', (req, res) => {
 
 // get one user
 router.get('/:id', (req, res) => {
-    Contract.findOne({
+    Project.findOne({
         where: {
             id: req.params.id
         },
         attributes: [
             'id', 
-            'contract_url', 
+            'project_url', 
             'title', 
             'created_at'
             // [
@@ -62,7 +62,7 @@ router.get('/:id', (req, res) => {
             //include comment model
             {
               model: Comment,
-              attributes: ['id', 'comment_text', 'contract_id', 'user_id', 'created_at'],
+              attributes: ['id', 'comment_text', 'project_id', 'user_id', 'created_at'],
               include: {
                 model: User,
                 attributes: ['username']
@@ -74,12 +74,12 @@ router.get('/:id', (req, res) => {
             }
         ]
     })
-    .then(dbContractData => {
-        if (!dbContractData) {
-            res.status(404).json({ message: 'No contract found with this id'});
+    .then(dbProjectData => {
+        if (!dbProjectData) {
+            res.status(404).json({ message: 'No project found with this id'});
             return;
         }
-        res.json(dbContractData);
+        res.json(dbProjectData);
     })
     .catch(err => {
         console.log(err);
@@ -88,13 +88,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    // expects title, contract_url, user_id
-    Contract.create({
+    // expects title, project_url, user_id
+    Project.create({
         title: req.body.title,
-        contract_url: req.body.contract_url,
+        project_url: req.body.project_url,
         user_id: req.body.user_id
     })
-    .then(dbContractData => res.json(dbContractData))
+    .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -102,7 +102,7 @@ router.post('/', (req, res) => {
 });
 
 // Script could be used
-// // Put /api/contracts/upvote
+// // Put /api/projects/upvote
 // router.put('/upvote', (req, res) => {
 //     // custom static method created in models/Post.js
 //     Post.upvote(req.body, { Vote })
@@ -114,7 +114,7 @@ router.post('/', (req, res) => {
 // });
 
 router.put('/:id', (req, res) => {
-    Contract.update(
+    Project.update(
       {
         title: req.body.title
       },
@@ -124,12 +124,12 @@ router.put('/:id', (req, res) => {
         }
       }
     )
-      .then(dbContractData => {
-        if (!dbContractData) {
-          res.status(404).json({ message: 'No Contract found with this id' });
+      .then(dbProjectData => {
+        if (!dbProjectData) {
+          res.status(404).json({ message: 'No Project found with this id' });
           return;
         }
-        res.json(dbContractData);
+        res.json(dbProjectData);
       })
       .catch(err => {
         console.log(err);
@@ -138,13 +138,13 @@ router.put('/:id', (req, res) => {
   });
 
   router.delete('/:id', (req, res) => {
-    Contract.destroy({
+    Project.destroy({
       where: {
         id: req.params.id
       }
     })
-      .then(dbContractData => {
-        if (!dbContractData) {
+      .then(dbProjectData => {
+        if (!dbProjectData) {
           res.status(404).json({ message: 'No post found with this id' });
           return;
         }
