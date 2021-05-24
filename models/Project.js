@@ -30,7 +30,7 @@ class Project extends Model {
             include: [
               {
                 model: models.Client,
-                attributes: ['client_id', 'client_first_name', 'client_last_name', 'company_name'],
+                attributes: ['client_id', 'client_first_name', 'client_last_name', 'client_company_name', 'client_email'],
                 include: {
                   model: models.User,
                   attributes: ['username', 'user_first_name', 'user_last_name']
@@ -97,6 +97,13 @@ Project.init(
                 model: 'client',
                 key: 'client_id'
             }
+        },
+        client_email: {
+                type: DataTypes.STRING,
+                references: {
+                    model: 'client',
+                    key: 'client_id'
+                }
         },
         contract_signed: {
             type: DataTypes.BOOLEAN
