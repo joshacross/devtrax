@@ -99,11 +99,11 @@ Project.init(
             }
         },
         client_email: {
-                type: DataTypes.STRING,
-                references: {
-                    model: 'client',
-                    key: 'client_id'
-                }
+            type: DataTypes.STRING,
+            references: {
+                model: 'client',
+                key: 'client_id'
+            }
         },
         contract_signed: {
             type: DataTypes.BOOLEAN
