@@ -1,29 +1,33 @@
 const router = require('express').Router();
-const { Project, User } = require('../../models');
+const { Project, User, Client } = require('../../models');
 const sequelize = require('../../config/connection');
+const withAuth = require('../../utils/auth');
 
 // get all users
 router.get('/', (req, res) => {
     Project.findAll({
         // define attributes
         attributes: [
-            'id', 
-            'project_url', 
-            'title', 
-            'created_at'
-            // [
-            //     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'),
-            //     'vote_count'
-            // ]
+          'project_id',
+          'project_title',
+          'services_rendered',
+          'project_start_date',
+          'project_completion_date',
+          'total_price_of_project',
+          'fee_schedule',
+          'length_of_project',
+          'contract_created',
+          'contract_signed',
+          'created_at'
         ],
-        // order projects based on the most recent created_at date
+        // order projects based on the most recent project created_at date
         order: [['created_at', 'DESC']],
         // JOIN to the user table using include
         include: [
-            //include comment model
+            //include client model
             {
-              model: Comment,
-              attributes: ['id', 'comment_text', 'project_id', 'user_id', 'created_at'],
+              model: Client,
+              attributes: ['client_id', 'client_first_name', 'client_last_name', 'client_company_name', 'client_email'],
               include: {
                 model: User,
                 attributes: ['username']
@@ -48,21 +52,28 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
+        // define attributes
         attributes: [
-            'id', 
-            'project_url', 
-            'title', 
-            'created_at'
-            // [
-            //     sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'),
-            //     'vote_count'
-            // ]
+          'project_id',
+          'project_title',
+          'services_rendered',
+          'project_start_date',
+          'project_completion_date',
+          'total_price_of_project',
+          'fee_schedule',
+          'length_of_project',
+          'contract_created',
+          'contract_signed',
+          'created_at'
         ],
+        // order projects based on the most recent project created_at date
+        order: [['created_at', 'DESC']],
+        // JOIN to the user table using include
         include: [
-            //include comment model
+            //include client model
             {
-              model: Comment,
-              attributes: ['id', 'comment_text', 'project_id', 'user_id', 'created_at'],
+              model: Client,
+              attributes: ['client_id', 'client_first_name', 'client_last_name', 'client_company_name', 'client_email'],
               include: {
                 model: User,
                 attributes: ['username']
@@ -87,12 +98,26 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-    // expects title, project_url, user_id
+router.post('/', withAuth, (req, res) => {
+    // expects info about project: project title, project_url, user_id...etc.
     Project.create({
-        title: req.body.title,
+        project_title: req.body.title,
         project_url: req.body.project_url,
-        user_id: req.body.user_id
+        project_description: req.body.description,
+        project_title: req.body.project_title,
+        services_rendered: req.body.services_rendered,
+        project_start_date: req.body.start_date,
+        project_completion_date: req.body.project_completion,
+        total_price_of_project: req.body.price_of_project,
+        fee_schedule: req.body.fee_schedule,
+        length_of_project: req.body.length_of_project,
+        contract_created: req.body.contract_created,
+        contract_signed: req.body.contract_signed,
+        client_first_name: req.body.client_first_name,
+        client_last_name: req.body.client_last_name,
+        client_company_name: req.body.client_company_name,
+        client_email: req.body.client_email,
+        user_id: req.session.user_id
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {

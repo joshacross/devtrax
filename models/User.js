@@ -14,7 +14,7 @@ class User extends Model {
 User.init(
     {
         // define column id
-        id: {
+        user_id: {
             // use the special Sequelize DataTypes object provide what type of data it is
             type: DataTypes.INTEGER,
             // this is the equivalent of SQL's `NOT NULL` option
@@ -30,7 +30,7 @@ User.init(
             allowNull: false
         },
         // define an email column
-        email: {
+        user_email: {
             type: DataTypes.STRING,
             allowNull: false,
             // check for duplicates

@@ -17,6 +17,7 @@ class Project extends Model {
             },
             attributes: [
               'project_id',
+              'project_url',
               'project_title',
               'services_rendered',
               'project_start_date',
@@ -50,6 +51,10 @@ Project.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
+        },
+        project_url: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         project_title: {
             type: DataTypes.STRING,
