@@ -10,12 +10,14 @@ User.hasMany(Project, {
 });
 
 Project.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
 });
 
 // users have many clients
 User.hasMany(Client, {
-    foriegnKey: 'User_id'
+    foriegnKey: 'user_id',
+    onDelete: 'SET NULL'
 });
 
 // Clients have one user

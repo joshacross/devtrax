@@ -144,7 +144,7 @@ Project.init(
         //Project Timestamps
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
-    }
+    },
     {
         sequelize,
         freezeTabName: true,
