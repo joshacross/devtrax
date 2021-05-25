@@ -101,8 +101,8 @@ router.get('/:id', (req, res) => {
 router.post('/', withAuth, (req, res) => {
     // expects info about project: project title, project_url, user_id...etc.
     Project.create({
-        project_title: req.body.title,
         project_url: req.body.project_url,
+        project_title: req.body.title,
         project_description: req.body.description,
         project_title: req.body.project_title,
         services_rendered: req.body.services_rendered,
@@ -111,13 +111,17 @@ router.post('/', withAuth, (req, res) => {
         total_price_of_project: req.body.price_of_project,
         fee_schedule: req.body.fee_schedule,
         length_of_project: req.body.length_of_project,
-        contract_created: req.body.contract_created,
-        contract_signed: req.body.contract_signed,
         client_first_name: req.body.client_first_name,
         client_last_name: req.body.client_last_name,
         client_company_name: req.body.client_company_name,
         client_email: req.body.client_email,
-        user_id: req.session.user_id
+        contract_signed: req.body.contract_signed,
+        contract_created_date: req.body.contract_created_date,
+        contract_signed_date: req.body.contract_signed_date,
+        user_id: req.session.user_id,
+        username: req.session.username,
+        user_first_name: req.session.user_first_name,
+        user_last_name: req.session.user_last_name
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
@@ -125,6 +129,8 @@ router.post('/', withAuth, (req, res) => {
         res.status(500).json(err);
     });
 });
+
+
 
 // Script could be used
 // // Put /api/projects/upvote
