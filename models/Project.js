@@ -144,6 +144,12 @@ Project.init(
         //Project Timestamps
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
+    }
+    {
+        sequelize,
+        freezeTabName: true,
+        underscored: true,
+        modelName: 'project'
     });
 
 module.exports = Project;
