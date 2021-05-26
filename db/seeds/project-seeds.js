@@ -16,7 +16,7 @@ const projectdata = [
         client_first_name: "Ricardo",
         client_last_name: "Limon",
         client_email_address: "rlimon@limonauto.com",
-        client_company: "Limon Auto Body and Collision",
+        client_company_name: "Limon Auto Body and Collision",
         client_billing_address: "74 4th street",
         client_city: "Nashville",
         client_zipcode: 37203,
