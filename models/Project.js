@@ -19,7 +19,9 @@ class Project extends Model {
               'project_id',
               'project_url',
               'project_title',
+              'project_description',
               'services_rendered',
+              'services_rendered_description',
               'project_start_date',
               'project_completion_date',
               'total_price_of_project',
@@ -27,9 +29,16 @@ class Project extends Model {
               'length_of_project',
               'client_first_name',
               'client_last_name',
+              'client_email_address',
               'client_company_name',
-              'client_email'
-
+              'client_billing_address',
+              'client_city',
+              'client_zipcode',
+              'contract_signed',
+              'contract_created_date',
+              'contract_signed_date',
+              'created_at',
+              'updated_at'
             ],
             include: {
                 model: models.User,
@@ -63,6 +72,9 @@ Project.init(
         services_rendered: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        services_rendered_description: {
+            type: DataTypes.STRING
         },
         project_start_date: {
             type: DataTypes.TIME
