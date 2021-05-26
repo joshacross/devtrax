@@ -70,7 +70,7 @@ Client.init(
         },
         client_city: {
             type: DataTypes.STRING,
-        }
+        },
         client_zipcode: {
             type: DataTypes.INTEGER
         },
@@ -91,6 +91,12 @@ Client.init(
         //Client Created Timestamps
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
+    },
+    {
+        sequelize,
+        freezeTabName: true,
+        underscored: true,
+        modelName: 'client'
     });
 
-module.exports = Project;
+module.exports = Client;
