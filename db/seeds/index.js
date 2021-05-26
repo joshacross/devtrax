@@ -1,8 +1,8 @@
 const seedUsers = require('./user-seeds');
 const seedProjects = require('./project-seeds');
-const seedsClients = require('./client-seeds');
+// const seedsClients = require('./client-seeds');
 
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -10,8 +10,8 @@ const seedAll = async () => {
   await seedUsers();
   console.log('--------------');
 
-  await seedClients();
-  console.log('--------------');
+  // await seedClients();
+  // console.log('--------------');
 
   await seedProjects();
   console.log('--------------');
