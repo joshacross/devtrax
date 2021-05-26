@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/joshacross/sexual-contract/issues"
   },
-  "homepage": "https://github.com/joshacross/sexual-contract#readme"
+  "homepage": "https://github.com/joshacross/sexual-contract#readme",
+  "dependencies": {
+    "fontawesome": "^5.6.3"
+  }
 }
