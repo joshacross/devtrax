@@ -1,4 +1,3 @@
-
     <!-- Title of Contract -->
     <header>
         <h2 style="text-align: center;"> <strong>Agreement for {{client_first_name}} {{client_last_name}}<span class="field" data-name="agreement"
@@ -169,15 +168,11 @@
         <p>Just like a parking ticket, you cannot transfer this contract to anyone else without my permission. This
             contract stays in place and need not be renewed.</p>
         <p>Everyone should sign above and keep a copy for their own records.</p>
-        <span class="sign-box col s6">
-            <div class="input-field">
-                <input id="sign-off" type="text" class="validate" placeholder="First Name & Last Name">
-            </div>
-        </span>
-        <div class="input-field col s3">
-            <label>
-                <input type="checkbox" />
-                <span>I agree to the <a href="terms">terms and conditions</a> preseted by {{first_name}} {{last_name}}</span>
+
+        <h3>
+        {{client_first_name}} {{client_last_name}}
+        </h3>
+        <i class="material-icons">check</i> I agree to the <a href="terms">terms and conditions</a> preseted by {{first_name}} {{last_name}}</span>
             </label>
         <div class=>
             <button class="btn waves-effect waves-light" type="submit" name="action" style="float: right;">Submit

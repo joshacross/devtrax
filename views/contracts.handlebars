@@ -1,0 +1,77 @@
+    <nav class="green" role="navigation">
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo">DevTrax</a>
+        </div>
+    </nav>
+      <div class="container">
+        <div class="row">
+          <form class="col s12" action="profile/1" method="POST">
+            <div class="row">
+              <div class="input-field col s6">
+                <input
+                  placeholder="Placeholder"
+                  name="first_name"
+                  type="text"
+                  class="validate"
+                  required
+                />
+                <label for="first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input name="last_name" type="text" class="validate" required />
+                <label for="last_name">Last Name</label>
+              </div>
+            </div>
+            <div class="row input-field s12">
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="project_start_date"
+                  class="datepicker"
+                  required
+                />
+                <label for="project_start_date">Start Date</label>
+              </div>
+              <div class="input-field">
+                <input
+                  type="text"
+                  name="project_completion_date"
+                  class="datepicker"
+                  required
+                />
+                <label for="project_completion_date">End Date</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <input
+                  name="fee_schedule"
+                  type="text"
+                  class="validate"
+                  required
+                />
+                <label for="fee_schedule">Fee Structure</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <input
+                  name="total_price_of_project"
+                  type="text"
+                  class="validate"
+                  required
+                />
+                <label for="total_price_of_project">Rate</label>
+              </div>
+            </div>
+            <div class="file-field input-field">
+              <input
+                type="submit"
+                class="btn waves-effect green"
+                value="Submit"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
