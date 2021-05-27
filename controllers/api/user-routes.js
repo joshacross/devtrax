@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Vote, Comment } = require('../../models');
+const { User, Project } = require('../../models');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -15,54 +15,19 @@ router.get('/', (req, res) => {
 });
 
 //GET /api/users/1
-router.get('/:id', (req, res) => {
-    User.findOne({
+router.get('/:id', async (req, res) => {
+    let user = await User.findOne({
         attibutes: { exclude: ['password'] },
         where: {
-            id: req.params.id
+            user_id: req.params.id
         },
-        include: [
-            {
-                model: Project,
-                attributes: [
-                    'project_id',
-                    'project_url',
-                    'project_title',
-                    'project_description',
-                    'services_rendered',
-                    'services_rendered_description',
-                    'project_start_date',
-                    'project_completion_date',
-                    'total_price_of_project',
-                    'fee_schedule',
-                    'length_of_project',
-                    'client_first_name',
-                    'client_last_name',
-                    'client_email_address',
-                    'client_company_name',
-                    'client_billing_address',
-                    'client_city',
-                    'client_zipcode',
-                    'contract_signed',
-                    'contract_created_date',
-                    'contract_signed_date',
-                    'created_at',
-                    'updated_at'
-                ]
-            }
-        ]
-    })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id'});
-            return;
-        }
-        res.json(dbUserData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
     });
+    let projects = await Project.findAll({
+        where: {
+            user_id: req.params.id
+        },
+    })
+    res.json({ user, projects});
 });
 
 // POST /api/users
