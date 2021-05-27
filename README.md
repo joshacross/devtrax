@@ -37,10 +37,10 @@
   - Email: wberry86@gmail.com
 
 
-[![Screenshot-1.png]()]
+[![Screenshot-1.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax1.PNG)]
 
-[![Screenshot-2.png]()]
+[![Screenshot-2.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax2.PNG)]
 
-[![Screenshot-3.png]()]
+[![Screenshot-3.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax3.PNG)]
 
-[![Screenshot-4.png]()]
+[![Screenshot-4.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax4.PNG)]
