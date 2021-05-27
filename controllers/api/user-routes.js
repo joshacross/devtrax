@@ -46,11 +46,7 @@ router.post('/', (req, res) => {
         req.session.loggedIn = true;
 
         res.json(dbUserData);
-<<<<<<< HEAD
         res.redirect('profile/:id');
-=======
-        res.redirect('/profile/:id');
->>>>>>> 8b8bd2b178e7d2046e31ba3dc16bab5f140a2f61
     });
 });
 
