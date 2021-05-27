@@ -2,19 +2,21 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Project, User } = require('../models');
 
-// Home Page = Login Page if logged in route to /
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/profile/:id');
-    return;
-  }
-  res.render('login');
-});
+// // Home Page = Login Page if logged in route to /
+// router.get('/login', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/profile/:id');
+//     return;
+//   }
+//   res.render('login');
+// });
 
 // Home Page , if logged in go to profile, if not go to login
 router.get('/', (req, res) => {
+  console.log("---------------------------------------------" + JSON.stringify(req.session));
   if (req.session.loggedIn) {
-    res.redirect('/profile/:id');
+    console.log("-------------------------------------after");
+    res.redirect('/profile/' + req.session.user_id);
     return;
   }
   res.render('login');
@@ -26,36 +28,36 @@ router.get('/contracts', (req, res) => {
   return;
 });
 
-// login routes
-router.get('/login', (req, res) => {
-  // Query Operation > expects email, password
-  User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then(dbUserData => {
-    if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
-      return;
-    }
+// // login routes
+// router.get('/login', (req, res) => {
+//   // Query Operation > expects email, password
+//   User.findOne({
+//     where: {
+//       email: req.body.email
+//     }
+//   }).then(dbUserData => {
+//     if (!dbUserData) {
+//       res.status(400).json({ message: 'No user with that email address!' });
+//       return;
+//     }
 
-    // Verify User
-    const validPassword = dbUserData.checkPassword(req.body.password);
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
-      return;
-    }
+//     // Verify User
+//     const validPassword = dbUserData.checkPassword(req.body.password);
+//     if (!validPassword) {
+//       res.status(400).json({ message: 'Incorrect password!' });
+//       return;
+//     }
 
-    req.session.save(() => {
-      //declare session variables
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
+//     req.session.save(() => {
+//       //declare session variables
+//       req.session.user_id = dbUserData.id;
+//       req.session.username = dbUserData.username;
+//       req.session.loggedIn = true;
 
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
-    });
-  });
-});
+//       res.json({ user: dbUserData, message: 'You are now logged in!' });
+//     });
+//   });
+// });
 
 //Signup Page
 router.get('/signup', (req, res) => {
