@@ -56,22 +56,22 @@
                         <img src="assets/background-profile.png">
                     </div>
                     <a href="#user"><img class="circle"
-                            src="assets/profile-icon-2.png"></a>
+                            src="assets/profile-icon.png"></a>
                     <a href="#name"><span class="white-text name">John
                             Doe</span></a>
                     <a href="#email"><span
                             class="white-text email">jdandturk@gmail.com</span></a>
                 </div>
             </li>
-            <li><a href="#!"><i class="material-icons">cloud</i>First Link With
-                    Icon</a></li>
-            <li><a href="#!">Second Link</a></li>
+            <li><a href="#!"><i class="material-icons">history</i>History</a></li>
+            <li><a href="#!"><i class="material-icons">calendar_today</i>Calendar</a></li>
             <li>
                 <div class="divider"></div>
             </li>
-            <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#!">Third Link With Waves</a>
-            </li>
+            <li><a class="subheader">Navigation</a></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">home</i>Home</a></li>
+            <li><a class="waves-effect" href="#login.html"><i class="material-icons">logout</i>Logout</a></li>
+            
         </ul>
 
         <!-- right main content -->
@@ -120,22 +120,22 @@
                             <div class="col s12 m6 l6 contract-card" id='contract-card-1'>
                                 <div class="card green lighten-1">
                                     <div class="card-content white-text">
-                                        <span class="card-title">Test Client Name - Project Name</span>
+                                        <span class="card-title">{{client_first_name}} {{client_last_name}} - {{project_title}}</span>
                                         <div class="row">
                                             <div class="col s6">Contract Dates:</div>
-                                            <div class="col s6" id="contract-dates">1/1/2021 - 1/31/2021</div>
+                                            <div class="col s6" id="contract-dates">{{project_start_date}} - {{project_completion_date}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col s6">Fee Structure:</div>
-                                            <div class="col s6" id="contract-fee-structre">Lump Sum</div>
+                                            <div class="col s6" id="contract-fee-structre">{{fee_schedule}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col s6">Rate:</div>
-                                            <div class="col s6" id="contract-rate">$3,000</div>
+                                            <div class="col s6" id="contract-rate">{{total_price_of_project}}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col s6">Contract Status:</div>
-                                            <div class="col s6" id="contract-status">Completed Paid</div>
+                                            <div class="col s6" id="contract-status">{{contract_signed}}</div>
                                         </div>
                                     </div>
                                     <div class="card-action">
@@ -315,379 +315,4 @@
 
 </body>
 
-</html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1.0"
-    />
-    <title>DevTrax</title>
-
-    <!-- CSS  -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="./public/stylesheets/materialize.css"
-      type="text/css"
-      rel="stylesheet"
-      media="screen,projection"
-    />
-    <link
-      href="./public/stylesheets/style.css"
-      type="text/css"
-      rel="stylesheet"
-      media="screen,projection"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="./public/assets/file-icon.png"
-    />
-
-    <style>
-      body {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-      }
-
-      main {
-        flex: 1 0 auto;
-      }
-
-      @media only screen and (min-width: 992px) {
-        body {
-          padding-left: 300px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <nav class="green" role="navigation">
-      <a href="#" data-target="slide-out" class="sidenav-trigger"
-        ><i class="material-icons">menu</i></a
-      >
-      <div class="nav-wrapper container">
-        <a id="logo-container" href="index.html" class="brand-logo">DevTrax</a>
-      </div>
-    </nav>
-
-    <br />
-
-    <div class="row">
-      <!-- left side nav -->
-      <ul id="slide-out" class="sidenav sidenav-fixed">
-        <li>
-          <div class="user-view">
-            <div class="background">
-              <img src="assets/background-profile.png" />
-            </div>
-            <a href="#user"
-              ><img class="circle" src="assets/profile-icon.png"
-            /></a>
-            <a href="#name"><span class="white-text name">John Doe</span></a>
-            <a href="#email"
-              ><span class="white-text email">jdandturk@gmail.com</span></a
-            >
-          </div>
-        </li>
-        <li>
-          <a href="#!"><i class="material-icons">history</i>History</a>
-        </li>
-        <li>
-          <a href="#!"><i class="material-icons">calendar_today</i>Calendar</a>
-        </li>
-        <li>
-          <div class="divider"></div>
-        </li>
-        <li><a class="subheader">Navigation</a></li>
-        <li>
-          <a class="waves-effect" href="#!"
-            ><i class="material-icons">home</i>Home</a
-          >
-        </li>
-        <li>
-          <a class="waves-effect" href="#login.html"
-            ><i class="material-icons">logout</i>Logout</a
-          >
-        </li>
-      </ul>
-
-      <!-- right main content -->
-      <div class="col s12">
-        <!-- search bar for document query -->
-        <nav>
-          <div class="nav-wrapper green lighten-1">
-            <form>
-              <div class="input-field">
-                <input
-                  id="search"
-                  type="search"
-                  onkeyup="searchBar()"
-                  required
-                />
-                <label class="label-icon" for="search"
-                  ><i class="material-icons">search</i></label
-                >
-                <i class="material-icons">close</i>
-              </div>
-            </form>
-          </div>
-        </nav>
-
-        <!-- compose new contract floater -->
-        <div class="fixed-action-btn">
-          <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
-          </a>
-          <ul>
-            <li>
-              <a class="btn-floating red"
-                ><i class="material-icons">insert_chart</i></a
-              >
-            </li>
-            <li>
-              <a class="btn-floating yellow darken-1"
-                ><i class="material-icons">format_quote</i></a
-              >
-            </li>
-            <li>
-              <a class="btn-floating green"
-                ><i class="material-icons">publish</i></a
-              >
-            </li>
-            <li>
-              <a class="btn-floating blue"
-                ><i class="material-icons">attach_file</i></a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <br /><br />
-        <main style="padding-bottom: 30%">
-          <!-- card container -->
-          <div class="container" id="card-container">
-            <div class="row" id="card-container-row">
-              <!-- card start-->
-              <!-- NOTE: use handlebars here to dynamically add content to page from user data -->
-              <div class="col s12 m6 l6 contract-card" id="contract-card-1">
-                <div class="card green lighten-1">
-                  <div class="card-content white-text">
-                    <span class="card-title"
-                      >Test Client Name - Project Name</span
-                    >
-                    <div class="row">
-                      <div class="col s6">Contract Dates:</div>
-                      <div class="col s6" id="contract-dates">
-                        1/1/2021 - 1/31/2021
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Fee Structure:</div>
-                      <div class="col s6" id="contract-fee-structre">
-                        Lump Sum
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Rate:</div>
-                      <div class="col s6" id="contract-rate">$3,000</div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Contract Status:</div>
-                      <div class="col s6" id="contract-status">
-                        Completed Paid
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Click to Open Contract</a>
-                  </div>
-                </div>
-              </div>
-              <!-- card end-->
-              <!-- card start-->
-              <div class="col s12 m6 l6 contract-card">
-                <div class="card green lighten-1">
-                  <div class="card-content white-text">
-                    <span class="card-title">Another Client - His Website</span>
-                    <div class="row">
-                      <div class="col s6">Contract Dates:</div>
-                      <div class="col s6" id="contract-dates">
-                        1/1/2021 - 1/31/2021
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Fee Structure:</div>
-                      <div class="col s6" id="contract-fee-structre">
-                        Lump Sum
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Rate:</div>
-                      <div class="col s6" id="contract-rate">$3,000</div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Contract Status:</div>
-                      <div class="col s6" id="contract-status">
-                        Completed Paid
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Click to Open Contract</a>
-                  </div>
-                </div>
-              </div>
-              <!-- card end-->
-              <!-- card start-->
-              <div class="col s12 m6 l6 contract-card">
-                <div class="card green lighten-1">
-                  <div class="card-content white-text">
-                    <span class="card-title">Other Client - Website Build</span>
-                    <div class="row">
-                      <div class="col s6">Contract Dates:</div>
-                      <div class="col s6" id="contract-dates">
-                        1/1/2021 - 1/31/2021
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Fee Structure:</div>
-                      <div class="col s6" id="contract-fee-structre">
-                        Lump Sum
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Rate:</div>
-                      <div class="col s6" id="contract-rate">$3,000</div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Contract Status:</div>
-                      <div class="col s6" id="contract-status">
-                        Completed Paid
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Click to Open Contract</a>
-                  </div>
-                </div>
-              </div>
-              <!-- card end-->
-              <!-- card start-->
-              <div class="col s12 m6 l6 contract-card">
-                <div class="card green lighten-1">
-                  <div class="card-content white-text">
-                    <span class="card-title"
-                      >My Neighbor - Personal Portfolio</span
-                    >
-                    <div class="row">
-                      <div class="col s6">Contract Dates:</div>
-                      <div class="col s6" id="contract-dates">
-                        1/1/2021 - 1/31/2021
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Fee Structure:</div>
-                      <div class="col s6" id="contract-fee-structre">
-                        Lump Sum
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Rate:</div>
-                      <div class="col s6" id="contract-rate">$3,000</div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Contract Status:</div>
-                      <div class="col s6" id="contract-status">
-                        Completed Paid
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Click to Open Contract</a>
-                  </div>
-                </div>
-              </div>
-              <!-- card end-->
-              <!-- card start-->
-              <div class="col s12 m6 l6 contract-card">
-                <div class="card green lighten-1">
-                  <div class="card-content white-text">
-                    <span class="card-title"
-                      >Creed - Creedthoughts.gov.com</span
-                    >
-                    <div class="row">
-                      <div class="col s6">Contract Dates:</div>
-                      <div class="col s6" id="contract-dates">
-                        1/1/2021 - 1/31/2021
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Fee Structure:</div>
-                      <div class="col s6" id="contract-fee-structre">
-                        Lump Sum
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Rate:</div>
-                      <div class="col s6" id="contract-rate">$3,000</div>
-                    </div>
-                    <div class="row">
-                      <div class="col s6">Contract Status:</div>
-                      <div class="col s6" id="contract-status">
-                        Completed Paid
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Click to Open Contract</a>
-                  </div>
-                </div>
-              </div>
-              <!-- card end-->
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-
-    <footer class="page-footer green">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 contract-card s12">
-            <h5 class="white-text">Company Info</h5>
-            <p class="grey-text text-lighten-4">
-              We are a team of college students working on this project like
-              it's our full time job. Any amount would help support and continue
-              development on this project and is greatly appreciated.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-          © 2021 DevTrax
-          <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
-        </div>
-      </div>
-    </footer>
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="./public/javascript/materialize.js"></script>
-    <script src="./public/javascript/init.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var elems = document.querySelectorAll(".fixed-action-btn");
-        var instances = M.FloatingActionButton.init(elems, {
-          direction: "top",
-        });
-      });
-    </script>
-  </body>
 </html>

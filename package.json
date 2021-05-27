@@ -1,19 +1,36 @@
 {
-  "name": "sexual-contract",
+  "name": "devtrax",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "nodemon server.js",
+    "seeds": "node db/seeds/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joshacross/sexual-contract.git"
+    "url": "git+https://github.com/joshacross/devtrax.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/joshacross/sexual-contract/issues"
+    "url": "https://github.com/joshacross/devtrax/issues"
   },
-  "homepage": "https://github.com/joshacross/sexual-contract#readme"
+  "homepage": "https://github.com/joshacross/devtrax#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.1",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-session": "^1.17.2",
+    "jest": "^26.6.3",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "db-seed": "^1.2.0"
+  }
 }
