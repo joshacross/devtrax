@@ -4,74 +4,127 @@
         <a id="logo-container" href="index.html" class="brand-logo">DevTrax</a>
         </div>
     </nav>
-      <div class="container">
-        <div class="row">
-          <form class="col s12" action="profile/1" method="POST">
-            <div class="row">
-              <div class="input-field col s6">
-                <input
-                  placeholder="Placeholder"
-                  name="first_name"
-                  type="text"
-                  class="validate"
-                  required
-                />
-                <label for="first_name">First Name</label>
-              </div>
-              <div class="input-field col s6">
-                <input name="last_name" type="text" class="validate" required />
-                <label for="last_name">Last Name</label>
-              </div>
+    <div class="container">
+      <div class="row">
+        <form class="col s12" action="profile/1" method="POST">
+          <div class="row">
+
+            <h3 style="text-align: center;">Client Info</h3>
+            <br>
+
+            <div class="input-field col s6">
+              <input placeholder="" name="client_first_name" type="text" class="validate" required />
+              <label for="client_first_name">First Name</label>
             </div>
-            <div class="row input-field s12">
-              <div class="input-field">
-                <input
-                  type="text"
-                  name="project_start_date"
-                  class="datepicker"
-                  required
-                />
-                <label for="project_start_date">Start Date</label>
-              </div>
-              <div class="input-field">
-                <input
-                  type="text"
-                  name="project_completion_date"
-                  class="datepicker"
-                  required
-                />
-                <label for="project_completion_date">End Date</label>
-              </div>
+
+            <div class="input-field col s6">
+              <input placeholder="" name="client_last_name" type="text" class="validate" required />
+              <label for="client_last_name">Last Name</label>
             </div>
-            <div class="row">
-              <div class="input-field">
-                <input
-                  name="fee_schedule"
-                  type="text"
-                  class="validate"
-                  required
-                />
-                <label for="fee_schedule">Fee Structure</label>
-              </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="client_email_address" type="text" class="validate" required />
+              <label for="client_email_address">Email</label>
             </div>
-            <div class="row">
-              <div class="input-field">
-                <input
-                  name="total_price_of_project"
-                  type="text"
-                  class="validate"
-                  required
-                />
-                <label for="total_price_of_project">Rate</label>
-              </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="client_company_name" type="text" class="validate" required />
+              <label for="client_company_name">Company Name</label>
             </div>
-            <div class="file-field input-field">
-              <input
-                type="submit"
-                class="btn waves-effect green"
-                value="Submit"
-              />
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="client_billing_address" type="text" class="validate" required />
+              <label for="client_billing_address">Billing Address</label>
             </div>
-          </form>
-        </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="client_city" type="text" class="validate" required />
+              <label for="client_city">City</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="client_zipcode" type="number" class="validate" required />
+              <label for="client_zipcode">Zipcode</label>
+            </div>
+          </div>
+
+          <br>
+          <h3 style="text-align: center;">Project Info</h3>
+          <br>
+
+          <div class="row input-field s12">
+
+            <div class="input-field">
+              <input placeholder="" type="text" name="project_start_date" class="datepicker" required />
+              <label for="project_start_date">Start Date</label>
+            </div>
+
+            <div class="input-field">
+              <input placeholder="" type="text" name="project_completion_date" class="datepicker" required />
+              <label for="project_completion_date">End Date</label>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="total_price_of_project" type="number" class="validate" required />
+              <label for="total_price_of_project">Rate</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="project_title" type="text" class="validate" required />
+              <label for="project_title">Project Title</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="project_description" type="text" class="validate" required />
+              <label for="project_description">Describe the project</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" name="fee_schedule" type="text" class="validate" required />
+              <label for="fee_schedule">Fee Schedule</label>
+            </div>
+          </div>
+
+          <!-- submit button -->
+          <div class="file-field input-field center">
+            <input type="submit" class="btn waves-effect green" value="Submit" />
+          </div>
+        </form>
       </div>
+    </div>
+<script>
+          var currYear = new Date().getFullYear();
+
+    $(document).ready(function () {
+      $(".datepicker").datepicker({
+        defaultDate: new Date(currYear - 5, 1, 31),
+        // setDefaultDate: new Date(2000,01,31),
+        maxDate: new Date(currYear - 5, 12, 31),
+        yearRange: [1928, currYear - 5],
+        format: "yyyy/mm/dd",
+      });
+    });
+
+    $(document).ready(function () {
+      $('select').formSelect();
+    });
+</script>

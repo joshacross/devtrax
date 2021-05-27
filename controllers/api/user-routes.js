@@ -30,25 +30,24 @@ router.get('/:id', async (req, res) => {
     res.json({ user, projects });
 });
 
-// POST /api/users
-// router.post('/', (req, res) => {
-//     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-//     User.create({
-//         username: req.body.username,
-//         first_name: req.body.first_name,
-//         last_name: req.body.last_name,
-//         email: req.body.email,
-//         password: req.body.password
-//     })
-//         .then(dbUserData => {
-//             req.session.user_id = dbUserData.id;
-//             req.session.username = dbUserData.username;
-//             req.session.loggedIn = true;
+router.post('/', (req, res) => {
+    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+    User.create({
+        username: req.body.username,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password
+    })
+        .then(dbUserData => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
 
-//             res.json(dbUserData);
-//             res.redirect('profile/:id');
-//         });
-// });
+            res.json(dbUserData);
+            res.redirect('profile/:id');
+        });
+});
 
 router.post('/login', (req, res) => {
     // Query Operation > expects email, password
@@ -70,16 +69,16 @@ router.post('/login', (req, res) => {
             return;
         }
 
-        // req.session.save(() => {
-        //     //declare session variables
-        //     console.log('111111111111111111111111111111111111111111');
-        //     req.session.user_id = dbUserData.user_id;
-        //     req.session.username = dbUserData.username;
-        //     req.session.loggedIn = true;
-        // });
+        req.session.save(() => {
+            //declare session variables
+            console.log('111111111111111111111111111111111111111111');
+            req.session.user_id = dataValues.user_id;
+            req.session.username = dataValues.username;
+            req.session.loggedIn = true;
+        });
         res.json({ user: dbUserDaclearta, message: 'You are now logged in!', ok: true });
         res.end();
-        router.get('/profile/4');
+        router.get('/profile/:id');
     });
 });
 

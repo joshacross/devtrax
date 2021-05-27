@@ -66,7 +66,7 @@
 
         <!-- compose new contract floater -->
         <div class="fixed-action-btn">
-            <a href="../create-contract.html" class="btn-floating btn-large red">
+            <a href="/contracts" class="btn-floating btn-large red">
                 <i class="large material-icons">mode_edit</i>
             </a>
             <ul>
@@ -111,7 +111,10 @@
                                     <div class="col s6" id="contract-status">{{dataValues.contract_signed}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s6"><a href="./client-contract/{{dataValues.project_id}}">View
+                                    <div class="col s6"><a href="client-contract-signature/{{dataValues.project_id}}">Signature Required</a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6"><a href="client-contract/{{dataValues.project_id}}">View
                                             Contract</a></div>
                                 </div>
                             </div>
