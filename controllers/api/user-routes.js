@@ -23,23 +23,32 @@ router.get('/:id', (req, res) => {
         },
         include: [
             {
-                model: Post,
-                attributes: ['id', 'title', 'post_url', 'created_at']
-            },
-            // include Comment model
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'created_at'],
-                include: {
-                    model: Post,
-                    attributes: ['title']
-                }
-            },
-            {
-                model: Post,
-                attributes: ['title'],
-                through: Vote,
-                as: 'voted_posts'   
+                model: Project,
+                attributes: [
+                    'project_id',
+                    'project_url',
+                    'project_title',
+                    'project_description',
+                    'services_rendered',
+                    'services_rendered_description',
+                    'project_start_date',
+                    'project_completion_date',
+                    'total_price_of_project',
+                    'fee_schedule',
+                    'length_of_project',
+                    'client_first_name',
+                    'client_last_name',
+                    'client_email_address',
+                    'client_company_name',
+                    'client_billing_address',
+                    'client_city',
+                    'client_zipcode',
+                    'contract_signed',
+                    'contract_created_date',
+                    'contract_signed_date',
+                    'created_at',
+                    'updated_at'
+                ]
             }
         ]
     })
@@ -120,7 +129,7 @@ router.post('/logout', (req, res) => {
 router.put('/:id', (req, res) => {
     // expects {username, email, password}
 
-    // if req.body has exact key.value pairs to match the model, you can use req.body instead
+    // if req.body has exact key.value pairs to match the model, use req.body instead
     User.update(req.body, {
         individualHooks: true,
         where: {
@@ -159,7 +168,5 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
-
 
 module.exports = router;
