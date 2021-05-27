@@ -38,11 +38,11 @@ async function contractFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/profile/1');
+      } else {
+        alert(response.statusText);
+      }
     }
-
-    document.location.replace('/profile/4');
-}
 
 
 document.querySelector('.contract-form').addEventListener('submit', contractFormHandler);
