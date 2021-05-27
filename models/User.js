@@ -24,13 +24,21 @@ User.init(
             // turn on auto increment
             autoIncrement: true
         },
+        first_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        last_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         // define username
         username: {
             type: DataTypes.STRING,
             allowNull: false
         },
         // define an email column
-        user_email: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             // check for duplicates
