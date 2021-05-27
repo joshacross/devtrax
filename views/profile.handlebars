@@ -111,15 +111,11 @@
                                     <div class="col s6" id="contract-status">{{dataValues.contract_signed}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s6"><a href="client-contract-signature/{{dataValues.project_id}}">Signature Required</a></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s6"><a href="client-contract/{{dataValues.project_id}}">View
-                                            Contract</a></div>
+                                    <div class="col s6"><a href="/client-contract-signature/{{dataValues.project_id}}">Signature Required</a></div>
                                 </div>
                             </div>
                             <div class="card-action">
-                                <a href="#">Click to Open Contract</a>
+                                <a href="/client-contract/{{dataValues.project_id}}">Click to Open Contract</a>
                             </div>
                         </div>
                     </div>

@@ -2,14 +2,15 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Project, User } = require('../models');
 
-// Home Page = Login Page if logged in route to /
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/profile/:id');
-    return;
-  }
-  res.render('login');
-});
+// // Home Page = Login Page if logged in route to /
+// router.get('/login', (req, res) => {
+//   User.findOne({
+//   if (req.session.loggedin) {
+//     res.redirect('/profile');
+//     return;
+//   }
+//   res.render('login');
+// });
 
 // Home Page , if logged in go to profile, if not go to login
 router.get('/', (req, res) => {
@@ -234,7 +235,7 @@ router.get('/client-contract-signature/:id', (req, res) => {
 });
 
 // get one user
-router.get('/client-contract', (req, res) => {
+router.get('/client-contract/:id', (req, res) => {
   Project.findOne({
     where: {
       project_id: req.params.id
@@ -281,7 +282,7 @@ router.get('/client-contract', (req, res) => {
         res.status(404).json({ message: 'No project found with this id' });
         return;
       }
-      res.render("client-contracts", dbProjectData.dataValues);
+      res.render("client-contract", dbProjectData.dataValues);
     })
     .catch(err => {
       console.log(err);
