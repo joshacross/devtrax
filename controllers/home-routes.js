@@ -41,7 +41,7 @@ router.get('/', (req, res) => {
     .then(dbProjectData => {
         const projects = dbProjectData.map(project => project.get({ plain: true}));
       // pass a single post object into the homepage template
-      res.render('homepage', { projectdata });
+      res.render('login', { projectdata });
     })
     .catch(err => {
       console.log(err);
