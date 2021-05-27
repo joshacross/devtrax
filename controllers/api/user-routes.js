@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Vote, Comment } = require('../../models');
+const { User, Project } = require('../../models');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -15,45 +15,19 @@ router.get('/', (req, res) => {
 });
 
 //GET /api/users/1
-router.get('/:id', (req, res) => {
-    User.findOne({
+router.get('/:id', async (req, res) => {
+    let user = await User.findOne({
         attibutes: { exclude: ['password'] },
         where: {
-            id: req.params.id
+            user_id: req.params.id
         },
-        include: [
-            {
-                model: Post,
-                attributes: ['id', 'title', 'post_url', 'created_at']
-            },
-            // include Comment model
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'created_at'],
-                include: {
-                    model: Post,
-                    attributes: ['title']
-                }
-            },
-            {
-                model: Post,
-                attributes: ['title'],
-                through: Vote,
-                as: 'voted_posts'   
-            }
-        ]
-    })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id'});
-            return;
-        }
-        res.json(dbUserData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
     });
+    let projects = await Project.findAll({
+        where: {
+            user_id: req.params.id
+        },
+    })
+    res.json({ user, projects});
 });
 
 // POST /api/users
@@ -61,6 +35,8 @@ router.post('/', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password
     })
@@ -118,7 +94,7 @@ router.post('/logout', (req, res) => {
 router.put('/:id', (req, res) => {
     // expects {username, email, password}
 
-    // if req.body has exact key.value pairs to match the model, you can use req.body instead
+    // if req.body has exact key.value pairs to match the model, use req.body instead
     User.update(req.body, {
         individualHooks: true,
         where: {
@@ -157,7 +133,5 @@ router.delete('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
-
 
 module.exports = router;

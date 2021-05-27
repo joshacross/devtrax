@@ -19,26 +19,32 @@ class Project extends Model {
               'project_id',
               'project_url',
               'project_title',
+              'project_description',
               'services_rendered',
+              'services_rendered_description',
               'project_start_date',
               'project_completion_date',
               'total_price_of_project',
               'fee_schedule',
               'length_of_project',
-              'contract_created',
-              'contract_signed'
+              'client_first_name',
+              'client_last_name',
+              'client_email_address',
+              'client_company_name',
+              'client_billing_address',
+              'client_city',
+              'client_zipcode',
+              'contract_signed',
+              'contract_created_date',
+              'contract_signed_date',
+              'created_at',
+              'updated_at'
             ],
-            include: [
-              {
-                model: models.Client,
-                attributes: ['client_id', 'client_first_name', 'client_last_name', 'client_company_name', 'client_email'],
-                include: {
-                  model: models.User,
-                  attributes: ['username', 'user_first_name', 'user_last_name']
+            include: {
+                model: models.User,
+                attributes: ['user_id', 'username', 'user_first_name', 'user_last_name']
                 }
-              }
-            ]
-          });
+              });
         });
       }
     }
@@ -67,6 +73,9 @@ Project.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        services_rendered_description: {
+            type: DataTypes.STRING
+        },
         project_start_date: {
             type: DataTypes.TIME
         },
@@ -74,41 +83,42 @@ Project.init(
             type: DataTypes.TIME
         },
         total_price_of_project: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER(10,2)
         },
         fee_schedule: {
             type: DataTypes.STRING
         },
         length_of_project: {
-            type: DataTypes.DATE
+            type: DataTypes.STRING
         },
+        // client_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        // },
         client_first_name: {
-            type: DataTypes.STRING,
-            references: {
-                model: 'client',
-                key: 'client_id'
-            }
-        },
+            type: DataTypes.STRING
+            },
         client_last_name: {
+            type: DataTypes.STRING
+            },
+        client_email_address: {
             type: DataTypes.STRING,
-            references: {
-                model: 'client',
-                key: 'client_id'
+            validate: {
+                isEmail: true
             }
         },
         client_company_name: {
             type: DataTypes.STRING,
-            references: {
-                model: 'client',
-                key: 'client_id'
-            }
-        },
-        client_email: {
+            allowNull: false
+            },
+        client_billing_address: {
             type: DataTypes.STRING,
-            references: {
-                model: 'client',
-                key: 'client_id'
-            }
+        },
+        client_city: {
+            type: DataTypes.STRING,
+        },
+        client_zipcode: {
+            type: DataTypes.INTEGER
         },
         contract_signed: {
             type: DataTypes.BOOLEAN
@@ -119,23 +129,8 @@ Project.init(
         contract_signed_date: {
             type: DataTypes.DATE
         },
-        username: {
-            type: DataTypes.STRING,
-            references: {
-                model: 'user',
-                key: 'user_id'
-            }
-        },
-        user_first_name: {
-            type: DataTypes.STRING,
-            references: {
-                model: 'user',
-                key: 'user_id'
-            }
-
-        },
-        user_last_name: {
-            type: DataTypes.STRING,
+        user_id: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'user_id'
