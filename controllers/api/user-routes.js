@@ -46,6 +46,7 @@ router.post('/', (req, res) => {
         req.session.loggedIn = true;
 
         res.json(dbUserData);
+        res.redirect('/profile/:id');
     });
 });
 
@@ -75,6 +76,7 @@ router.post('/login', (req, res) => {
         req.session.loggedIn = true;
             
         res.json({ user: dbUserData, message: 'You are now logged in!'});
+        res.redirect('profile/:id');
         });
     });
 });

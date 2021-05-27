@@ -27,7 +27,7 @@ router.get('/contracts', (req, res) => {
 });
 
 // login routes
-router.post('/login', (req, res) => {
+router.get('/login', (req, res) => {
   // Query Operation > expects email, password
   User.findOne({
       where: {
@@ -55,6 +55,12 @@ router.post('/login', (req, res) => {
       res.json({ user: dbUserData, message: 'You are now logged in!'});
       });
   });
+});
+
+//Signup Page
+router.get('/signup', (req, res) => {
+  res.render('signup');
+  return;
 });
 
 // router.get('/', (req, res) => {
