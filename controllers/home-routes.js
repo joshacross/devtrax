@@ -2,6 +2,25 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Project, User } = require('../models');
 
+// Home Page = Login Page if logged in route to /
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/profile/:id');
+    return;
+  }
+  res.render('login');
+});
+
+// Home Page , if logged in go to profile, if not go to login
+router.get('/', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/profile/:id');
+    return;
+  }
+  res.render('login');
+});
+
+
 router.get('/', (req, res) => {
   console.log(req.session);
 
@@ -47,14 +66,6 @@ router.get('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
-
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  res.render('login');
 });
 
 router.get('/profile', (req, res) => {
