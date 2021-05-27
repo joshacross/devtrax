@@ -2,6 +2,8 @@ async function signupFormHandler(event) {
     event.preventDefault();
   
     const username = document.querySelector('#username-signup').value.trim();
+    const firstName = document.querySelector('#firstname-signup').value.trim();
+    const lastName = document.querySelector('#lastname-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
     const firstName = document.querySelector('#first_name').value.trim();
@@ -12,6 +14,8 @@ async function signupFormHandler(event) {
         method: 'post',
         body: JSON.stringify({
           username,
+          first_name,
+          last_name,
           email,
           password
         }),
