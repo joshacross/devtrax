@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "seeds": "node db/seeds/index.js"
   },
   "repository": {
@@ -29,8 +29,5 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.6.2"
-  },
-  "devDependencies": {
-    "db-seed": "^1.2.0"
   }
 }
