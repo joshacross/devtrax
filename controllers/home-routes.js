@@ -26,6 +26,37 @@ router.get('/contracts', (req, res) => {
   return;
 });
 
+// login routes
+router.post('/login', (req, res) => {
+  // Query Operation > expects email, password
+  User.findOne({
+      where: {
+          email: req.body.email
+      }
+  }).then(dbUserData => {
+      if (!dbUserData) {
+          res.status(400).json({ message: 'No user with that email address!'});
+          return;
+      }
+
+      // Verify User
+      const validPassword = dbUserData.checkPassword(req.body.password);
+          if (!validPassword) {
+              res.status(400).json({ message: 'Incorrect password!'});
+              return;
+          }
+
+      req.session.save(() => {
+          //declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+          
+      res.json({ user: dbUserData, message: 'You are now logged in!'});
+      });
+  });
+});
+
 // router.get('/', (req, res) => {
 //   console.log(req.session);
 
@@ -73,28 +104,6 @@ router.get('/contracts', (req, res) => {
 //     });
 // });
 
-router.get('/profile', (req, res) => {
-  console.log(req.session);
-
-  User.findAll({
-    attributes: [
-      'user_id',
-      'username',
-      'first_name',
-      'last_name',
-    //   [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    ]
-  })
-    .then(dbUserData => {
-        const users = dbUserData.map(user => user.get({ plain: true}));
-      // pass a single post object into the profile template
-      res.render('profile', { projectData });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
 
 //GET /api/users/1
 router.get('/profile/:id', async (req, res) => {
@@ -216,5 +225,7 @@ router.get('/:id', (req, res) => {
       res.status(500).json(err);
   });
 });
+
+
 
 module.exports = router;
