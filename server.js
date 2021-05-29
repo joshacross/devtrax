@@ -17,6 +17,8 @@ const app = express();
 // const PORT = process.env.PORT || 3001;
 const PORT = process.env.PORT || "8000";
 
+const SequelizeStore = require('connect-session-sequelize')(expressSession.store);
+
 const session = {
   secret: process.env.SESSION_SECRET,
   cookie: {},
@@ -26,8 +28,6 @@ const session = {
     db: sequelize
   })
 };
-
-const SequelizeStore = require('connect-session-sequelize')(session.store);
 
 if (app.get('env') === "production") {
   // serve secure cookies, requires HTTPS
