@@ -32,20 +32,20 @@
                 <div class="background">
                     <img src="../assets/background-profile.png">
                 </div>
-                <a href="#user"><img class="circle" src="../assets/profile-icon.png"></a>
-                <a href="#name"><span class="white-text name">{{user.dataValues.first_name}}
-                        Doe</span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                <a href="/profile-page"><img class="circle" src="../assets/profile-icon.png"></a>
+                <a href="/profile-page"><span class="white-text name">{{user.dataValues.first_name}}
+                        {{user.dataValues.last_name}}</span></a>
+                <a href="/profile-page"><span class="white-text email">{{user.dataValues.username}}</span></a>
             </div>
         </li>
-        <li><a href="#!"><i class="material-icons">history</i>History</a></li>
-        <li><a href="#!"><i class="material-icons">calendar_today</i>Calendar</a></li>
+        <li><a href="/history"><i class="material-icons">history</i>History</a></li>
+        <li><a href="/calendar"><i class="material-icons">calendar_today</i>Calendar</a></li>
         <li>
             <div class="divider"></div>
         </li>
         <li><a class="subheader">Navigation</a></li>
-        <li><a class="waves-effect" href="#!"><i class="material-icons">home</i>Home</a></li>
-        <li><a id="logout" class="waves-effect" href="#login.html"><i class="material-icons">logout</i>Logout</a></li>
+        <li><a class="waves-effect" href=""><i class="material-icons">home</i>Home</a></li>
+        <li><a href="/logout" id="logout" class="waves-effect"><i class="material-icons">logout</i>Logout</a></li></button>
 
     </ul>
 

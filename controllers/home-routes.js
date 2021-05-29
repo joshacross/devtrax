@@ -2,26 +2,62 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Project, User } = require('../models');
 
-// // Home Page = Login Page if logged in route to /
-// router.get('/login', (req, res) => {
-//   User.findOne({
-//   if (req.session.loggedin) {
-//     res.redirect('/profile');
-//     return;
-//   }
-//   res.render('login');
-// });
 
-// Home Page , if logged in go to profile, if not go to login
+// Home Page , if logged in go to user's profile, if not redirect to login
 router.get('/', (req, res) => {
-  console.log("---------------------------------------------" + JSON.stringify(req.session));
   if (req.session.loggedIn) {
-    console.log("-------------------------------------after");
     res.redirect('/profile/' + req.session.user_id);
     return;
   }
-  res.render('login');
+  res.redirect('/login');
 });
+
+// If logged in, redirect to '/' which redirects to user profile
+// If not logged in, render login page.
+
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+
+  } else {
+  res.render('login');
+  }
+});
+
+// Login Post Route, by 
+router.post('/login', (req, res) => {
+  User.findOne({
+    where: {
+      email: req.session.email
+    }
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+  });
+});
+
+router.get('/logout', (req, res) => {
+  res.render('login');
+})
 
 //Contracts Page 
 router.get('/contracts', (req, res) => {
@@ -29,89 +65,58 @@ router.get('/contracts', (req, res) => {
   return;
 });
 
-// // login routes
-// router.get('/login', (req, res) => {
-//   // Query Operation > expects email, password
-//   User.findOne({
-//     where: {
-//       email: req.body.email
-//     }
-//   }).then(dbUserData => {
-//     if (!dbUserData) {
-//       res.status(400).json({ message: 'No user with that email address!' });
-//       return;
-//     }
-
-//     // Verify User
-//     const validPassword = dbUserData.checkPassword(req.body.password);
-//     if (!validPassword) {
-//       res.status(400).json({ message: 'Incorrect password!' });
-//       return;
-//     }
-
-//     req.session.save(() => {
-//       //declare session variables
-//       req.session.user_id = dbUserData.id;
-//       req.session.username = dbUserData.username;
-//       req.session.loggedIn = true;
-
-//       res.json({ user: dbUserData, message: 'You are now logged in!' });
-//     });
-//   });
-// });
-
 //Signup Page
 router.get('/signup', (req, res) => {
   res.render('signup');
   return;
 });
 
-// router.get('/', (req, res) => {
-//   console.log(req.session);
+router.get('/profile/:id', (req, res) => {
+  console.log(req.session);
 
-//   Project.findAll({
-//     attributes: [
-//       'project_id',
-//       'project_url',
-//       'project_title',
-//       'project_description',
-//       'services_rendered',
-//       'services_rendered_description',
-//       'project_start_date',
-//       'project_completion_date',
-//       'total_price_of_project',
-//       'fee_schedule',
-//       'length_of_project',
-//       'client_first_name',
-//       'client_last_name',
-//       'client_email_address',
-//       'client_company_name',
-//       'client_billing_address',
-//       'client_city',
-//       'client_zipcode',
-//       'contract_signed',
-//       'contract_created_date',
-//       'contract_signed_date',
-//       'created_at',
-//       'updated_at'
-//     ],
-//     include: [
-//       {
-//         model: User,
-//         attributes: ['user_id', 'username', 'first_name', 'last_name']
-//       }
-//     ]
-//   })
-//     .then(dbProjectData => {
-//         const projects = dbProjectData.map(project => project.get({ plain: true}));
-//       // pass a single post object into the homepage template
-//       res.render('login', { projectdata });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
+  Project.findAll({
+    attributes: [
+      'project_id',
+      'project_url',
+      'project_title',
+      'project_description',
+      'services_rendered',
+      'services_rendered_description',
+      'project_start_date',
+      'project_completion_date',
+      'total_price_of_project',
+      'fee_schedule',
+      'length_of_project',
+      'client_first_name',
+      'client_last_name',
+      'client_email_address',
+      'client_company_name',
+      'client_billing_address',
+      'client_city',
+      'client_zipcode',
+      'contract_signed',
+      'contract_created_date',
+      'contract_signed_date',
+      'created_at',
+      'updated_at'
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['user_id', 'username', 'first_name', 'last_name']
+      }
+    ]
+  })
+    .then(dbProjectData => {
+        const projects = dbProjectData.map(project => project.get({ plain: true}));
+      // pass a single post object into the homepage template
+      res.render('profile', { projectdata });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 
 //GET /api/users/1
