@@ -39,7 +39,7 @@ async function contractFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/profile/1');
+        document.location.replace('/profile/:id');
       } else {
         alert(response.statusText);
       }
