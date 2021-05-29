@@ -5,15 +5,13 @@ const exphbs = require('express-handlebars');
 const sequelize = require("./config/connection");
 
 // Connect session to Sequelize Database
-const session = require('express-session');
+const expressSession = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 
 require('dotenv').config();
 
 const authRouter = require('./controllers/api/auth');
-
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 // const PORT = process.env.PORT || 3001;
@@ -29,6 +27,8 @@ const session = {
   })
 };
 
+const SequelizeStore = require('connect-session-sequelize')(session.store);
+
 if (app.get('env') === "production") {
   // serve secure cookies, requires HTTPS
   session.cookie.secure = true;
@@ -40,9 +40,8 @@ const helpers = require('./utils/helpers');
 
 const hbs = exphbs.create({ helpers });
 
-app.set('views', path.join(__dirname, 'views'));
-
 app.engine('handlebars', hbs.engine);
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
