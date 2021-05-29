@@ -15,7 +15,7 @@ async function contractFormHandler(event) {
     const project_description = document.querySelector('#project_description').value.trim();
     const fee_schedule = document.querySelector('#fee_schedule').value.trim();
 
-    const response = await fetch(`/api/project`, {
+    const response = await fetch(`/api/project/`, {
         method: 'POST',
         body: JSON.stringify({
             client_first_name,
@@ -38,7 +38,7 @@ async function contractFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/profile/1');
+        document.location.replace('/profile/:id');
       } else {
         alert(response.statusText);
       }
