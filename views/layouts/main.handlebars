@@ -2,33 +2,45 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just Tech News</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>DevTrax</title>
 
-<body>
-    <div class="wrapper">
-        <header>
-            <h1>
-                <a href="/">Devtrax</a>
-            </h1>
-            <nav>
-                <button id="logout" class="btn-no-style">logout</button>
-                <a href="/login">Login</a>
-            </nav>
-        </header>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel="shortcut icon" type="image/png" href="/assets/file-icon.png"/>
+  </head>
+  <body>
         <main>
             {{{ body }}}
+            
         </main>
-        <footer>
-            Thanks for visiting!
-        </footer>
+  <footer class="page-footer green">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Info</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our
+            full time job. Any amount would help support and continue development on this project and is greatly
+            appreciated.</p>
+        </div>
     </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2021 DevTrax
+        <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
 
-    <script src="/javascript/logout.js"></script>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/javascript/materialize.js"></script>
+  <script src="/javascript/init.js"></script>
+  <script src="/javascript/logout.js"></script>
+  <script src="/javascript/contact.js"></script>
 </body>
-
 </html>

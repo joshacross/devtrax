@@ -1,0 +1,129 @@
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+
+    @media only screen and (min-width: 992px) {
+        body {
+            padding-left: 300px;
+        }
+    }
+</style>
+<nav class="green" role="navigation">
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo">DevTrax</a>
+    </div>
+</nav>
+
+<br>
+
+<div class="row">
+    <!-- left side nav -->
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="../assets/background-profile.png">
+                </div>
+                <a href="#user"><img class="circle" src="../assets/profile-icon.png"></a>
+                <a href="#name"><span class="white-text name">{{user.dataValues.first_name}}
+                        Doe</span></a>
+                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">history</i>History</a></li>
+        <li><a href="#!"><i class="material-icons">calendar_today</i>Calendar</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Navigation</a></li>
+        <li><a class="waves-effect" href="#!"><i class="material-icons">home</i>Home</a></li>
+        <li><a id="logout" class="waves-effect" href="#login.html"><i class="material-icons">logout</i>Logout</a></li>
+
+    </ul>
+
+    <!-- right main content -->
+    <div class="col s12">
+        <!-- search bar for document query -->
+        <nav>
+            <div class="nav-wrapper green lighten-1">
+                <form>
+                    <div class="input-field">
+                        <input id="search" type="search" onkeyup="searchBar()" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
+
+        <!-- compose new contract floater -->
+        <div class="fixed-action-btn">
+            <a href="/contracts" class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a>
+                </li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a>
+                </li>
+                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+            </ul>
+        </div>
+
+        <br><br>
+        <main style="padding-bottom: 30%;">
+            <!-- card container -->
+            <div class="container" id="card-container">
+                <div class="row" id="card-container-row">
+
+                    <!-- card start-->
+                    <!-- NOTE: use handlebars here to dynamically add content to page from user data -->
+                    {{#each projects}}
+                    <div class="col s12 m6 l6 contract-card" id='contract-card-1'>
+                        <div class="card green lighten-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">{{dataValues.client_first_name}}
+                                    {{dataValues.client_last_name}} - {{dataValues.project_title}}</span>
+                                <div class="row">
+                                    <div class="col s6">Contract Dates:</div>
+                                    <div class="col s6" id="contract-dates">{{dataValues.project_start_date}} -
+                                        {{dataValues.project_completion_date}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6">Fee Structure:</div>
+                                    <div class="col s6" id="contract-fee-structre">{{dataValues.fee_schedule}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6">Rate:</div>
+                                    <div class="col s6" id="contract-rate">{{dataValues.total_price_of_project}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6">Contract Status:</div>
+                                    <div class="col s6" id="contract-status">{{dataValues.contract_signed}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6"><a href="/client-contract-signature/{{dataValues.project_id}}">Signature Required</a></div>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <a href="/client-contract/{{dataValues.project_id}}">Click to Open Contract</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- card end-->
+                    {{/each}}
+
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
