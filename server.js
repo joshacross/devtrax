@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || "8000";
 
 const sequelize = require("./config/connection");
-const SequelizeStore = require('connect-session-sequelize')(expressSession.store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const session = {
   secret: process.env.SESSION_SECRET,
@@ -21,10 +21,10 @@ const session = {
   })
 };
 
-if (app.get('env') === "production") {
-  // serve secure cookies, requires HTTPS
-  session.cookie.secure = true;
-};
+// if (app.get('env') === "production") {
+//   // serve secure cookies, requires HTTPS
+//   session.cookie.secure = true;
+// };
 
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
