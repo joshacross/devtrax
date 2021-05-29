@@ -15,7 +15,7 @@ async function contractFormHandler(event) {
     const project_description = document.querySelector('#project_description').value.trim();
     const fee_schedule = document.querySelector('#fee_schedule').value.trim();
 
-    const response = await fetch(`/api/project`, {
+    const response = await fetch(`/api/project/`, {
         method: 'POST',
         body: JSON.stringify({
             client_first_name,
@@ -30,7 +30,8 @@ async function contractFormHandler(event) {
             total_price_of_project,
             project_title,
             project_description,
-            fee_schedule
+            fee_schedule,
+            user_id
         }),
         headers: {
             'Content-Type': 'application/json'
