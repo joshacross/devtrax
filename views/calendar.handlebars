@@ -1,3 +1,4 @@
+<link href='node_modules/fullcalendar/lib/main.css' rel='stylesheet' />
 <style>
 
 body {
@@ -70,24 +71,13 @@ margin: 0 auto;
   <h4 class="black-text">Dev<span class="green-text">Trax(s)</span</h4>
 
  <!--contracts submitted-->
-
+{{#each projects}}
   <div id='external-events-list'>
     <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'><!--get title name from sumbitted project_title--></div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>Project 2</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>Project 3</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class='fc-event-main'>Project 4</div>
-    </div>
-    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-      <div class="fc-event-main">Project 5</div>
+      <div class='fc-event-main'>{{dataValues.project_title}}</div>
     </div>
   </div>
+  {{/each}}
 
   <p>
     <input type='checkbox' id='drop-remove' />
@@ -97,10 +87,10 @@ margin: 0 auto;
 </div>
 
 <div id='calendar-wrap'>
-
     <!--Calendar-->
   <div id='calendar'></div>
 </div>
 
 </div>
+<script src='node_modules/fullcalendar/main.js'></script>
 <script src="/javascript/calendar.js"></script>
