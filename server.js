@@ -1,22 +1,14 @@
-const express = require('express');
 const path = require('path');
+const express = require('express');
+const expressSession = require('express-session');
 const exphbs = require('express-handlebars');
 
-const sequelize = require("./config/connection");
-
-// Connect session to Sequelize Database
-const expressSession = require('express-session');
-const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
-
-require('dotenv').config();
-
-const authRouter = require('./controllers/api/auth');
-
 const app = express();
+
 // const PORT = process.env.PORT || 3001;
 const PORT = process.env.PORT || "8000";
 
+const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(expressSession.store);
 
 const session = {
@@ -34,7 +26,12 @@ if (app.get('env') === "production") {
   session.cookie.secure = true;
 };
 
-// End Session Script^
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+
+require('dotenv').config();
+
+const authRouter = require('./controllers/api/auth.js');
 
 const helpers = require('./utils/helpers');
 
