@@ -58,10 +58,3 @@
 
 // document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
 // document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
-
-var webAuth = new auth0.WebAuth({
-  domain:       'jcross.us.auth0.com',
-  clientID:     'yI9F7Df4apEn8wszR3FvfSVivapN9MPd',
-  redirectUri:  '/profile/' + req.session.user_id,
-  
-});
