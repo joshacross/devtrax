@@ -107,12 +107,26 @@ app.use((req, res, next) => {
 
  app.use(require('./controllers/'));
 
+ const secured = (req, res, next) => {
+  if (req.user) {
+      return next();
+  }
+  req.session.returnTo = req.originalUrl;
+  res.redirect("/login");
+};
+
+// Defined routes
+app.get("/user", secured, (req, res, next) => {
+  const { _raw, _json, ...userProfile } = req.user;
+  res.render("user", {
+    title: "Profile",
+    userProfile: userProfile
+  });
+});
+
  sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 })
 .catch((error) => {
   console.error('Unable to connect to the database:', error);
 });
-
- 
-// Rest of

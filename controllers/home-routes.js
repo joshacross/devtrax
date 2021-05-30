@@ -1,29 +1,41 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Project, User } = require('../models');
+const passport = require('passport');
+require('dotenv').config();
 
-
-// Home Page , if logged in go to user's profile, if not redirect to login
-router.get('/', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/profile/' + req.session.user_id);
-    return;
+router.get(
+  "/",
+  passport.authenticate("auth0", {
+    scope: "openid email profile"
+  }),
+  (req, res) => {
+    res.render('profile');
   }
-  res.redirect('/login');
-});
+);
+
+
+// // Home Page , if logged in go to user's profile, if not redirect to login
+// router.get('/', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/profile/' + req.session.user_id);
+//     return;
+//   }
+//   res.redirect('/login');
+// });
 
 // If logged in, redirect to '/' which redirects to user profile
 // If not logged in, render login page.
 
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
+// router.get('/login', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/');
+//     return;
 
-  } else {
-  res.render('login');
-  }
-});
+//   } else {
+//   res.redirect('/login');
+//   }
+// });
 
 // Login Post Route, by 
 router.post('/login', (req, res) => {
