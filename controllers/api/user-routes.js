@@ -37,11 +37,12 @@ router.post('/', (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        nickname: req.session.passport.user.nickname,
     })
     .then(dbUserData => {
         req.session.save(() => {
-        req.session.user_id = dbUserData.id;
+        req.session.user_id = req.session.passport.user.id;
         req.session.username = dbUserData.username;
         req.session.email = dbUserData.email;
         req.session.loggedIn = true;

@@ -4,38 +4,68 @@ const { Project, User } = require('../models');
 const passport = require('passport');
 require('dotenv').config();
 
-router.get(
-  "/",
-  passport.authenticate("auth0", {
-    scope: "openid email profile"
-  }),
-  (req, res) => {
-    res.render('profile');
-  }
-);
-
-
-// // Home Page , if logged in go to user's profile, if not redirect to login
-// router.get('/', (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect('/profile/' + req.session.user_id);
-//     return;
+// router.get(
+//   "/",
+//   passport.authenticate("auth0", {
+//     scope: "openid email profile"
+//   }),
+//   (req, res) => {
+//     res.render('profile');
 //   }
-//   res.redirect('/login');
-// });
+// );
+
+
+// Home Page , if logged in go to user's profile, if not redirect to login
+router.get('/', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/profile/' + req.session.user_id);
+    return;
+  }
+  res.redirect('/login');
+});
 
 // If logged in, redirect to '/' which redirects to user profile
 // If not logged in, render login page.
 
-// router.get('/login', (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect('/');
-//     return;
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+  // if (req.session.loggedIn) {
+  //   let nickname = req.session.passport.user.nickname;
+  //   let displayname = req.session.passport.user.displayName;
+  //   let lastname = "";
+  //   let  = req.session.passport.user.displayName;
+  //   if (!nickName) {
+  //     const response = await fetch('/api/users', {
+  //       method: 'post',
+  //       body: JSON.stringify({
+  //         nickname,
+  //         displayname,
+  //         lastname,
+  //         email,
+  //         password
+  //       }),
+  //       headers: { 'Content-Type': 'application/json' }
+  //     });
 
-//   } else {
-//   res.redirect('/login');
-//   }
-// });
+  //     // check the response status
+  //     if (response.ok) {
+  //         console.log('success');
+  //     } else {
+  //         alert(response.statusText);
+  //     }
+  //   }
+  // }
+// }
+    // if(user !exists){
+    //   // post new user;
+    // }
+    res.redirect('/profile/' + req.session.user_id);
+    return;
+
+  } else {
+  res.redirect('/login');
+  }
+});
 
 // Login Post Route, by 
 router.post('/login', (req, res) => {
@@ -83,7 +113,7 @@ router.get('/signup', (req, res) => {
   return;
 });
 
-router.get('/profile/:id', (req, res) => {
+router.get('/profile/', (req, res) => {
   console.log(req.session);
 
   Project.findAll({
@@ -122,7 +152,7 @@ router.get('/profile/:id', (req, res) => {
     .then(dbProjectData => {
         const projects = dbProjectData.map(project => project.get({ plain: true}));
       // pass a single post object into the homepage template
-      res.render('profile', { projectdata });
+      res.render('profile', { projects });
     })
     .catch(err => {
       console.log(err);
@@ -187,7 +217,7 @@ router.get('/', (req, res) => {
     .then(dbProjectData => {
       const projects = dbProjectData.map(project => project.get({ plain: true }));
       // pass a single post object into the homepage template
-      res.render('project', { projectdata });
+      res.render('project', { projects });
     })
     .catch(err => {
       console.log(err);

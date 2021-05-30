@@ -7,6 +7,8 @@
  const router = express.Router();
  const passport = require("passport");
  const querystring = require("querystring");
+//  const sequelize = require('../config/connection');
+//   const { Project, User } = require('../models');
  
  require("dotenv").config();
 
@@ -19,7 +21,8 @@
     scope: "openid email profile"
   }),
   (req, res) => {
-    res.redirect("/profile/" + req.session.user_id);
+    res.redirect("/" + req.session.user_id);
+    // res.render('/');
   }
 );
 
@@ -36,8 +39,9 @@ router.get("/callback", (req, res, next) => {
         return next(err);
       }
       const returnTo = req.session.returnTo;
-      delete req.session.returnTo;
-      res.redirect(returnTo || "/");
+      // delete req.session.returnTo;
+      // userId = req.session.passport.user.id.substring(req.session.passport.user.id.length - 24 );
+      res.redirect(returnTo || "/profile/" + req.session.user_id);
     });
   })(req, res, next);
 });
@@ -56,12 +60,12 @@ router.get("/logout", (req, res) => {
   }
 
   const logoutURL = new URL(
-    `https://${process.env.AUTH0_DOMAIN}/v2/logout`
+    'https://${process.env.AUTH0_DOMAIN}/v2/logout'
   );
 
   const searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
-    returnTo: returnTo
+    returnTo: "localhost:3001"
   });
   logoutURL.search = searchString;
 
