@@ -37,21 +37,22 @@ router.post('/', (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        nickname: req.session.passport.user.nickname,
     })
-        .then(dbUserData => {
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
-            req.session.loggedIn = true;
+    .then(dbUserData => {
+        req.session.save(() => {
+        req.session.user_id = req.session.passport.user.id;
+        req.session.username = dbUserData.username;
+        req.session.email = dbUserData.email;
+        req.session.loggedIn = true;
 
-            res.json(dbUserData);
-            res.redirect('profile/:id');
+        res.json(dbUserData);
         });
+    });
 });
 
 router.post('/login', (req, res) => {
-    // Query Operation > expects email, password
-    console.log("post /login");
     User.findOne({
         where: {
             email: req.body.email
@@ -64,6 +65,7 @@ router.post('/login', (req, res) => {
 
         // Verify User
         const validPassword = dbUserData.checkPassword(req.body.password);
+        
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
@@ -71,14 +73,13 @@ router.post('/login', (req, res) => {
 
         req.session.save(() => {
             //declare session variables
-            console.log('111111111111111111111111111111111111111111');
-            req.session.user_id = dataValues.user_id;
-            req.session.username = dataValues.username;
+            req.session.user_id = dbUserData.user_id;
+            req.session.username = dbUserData.username;
+            req.session.email = dbUserData.email;
             req.session.loggedIn = true;
-        });
+
         res.json({ user: dbUserDaclearta, message: 'You are now logged in!', ok: true });
-        res.end();
-        router.get('/profile/:id');
+        });
     });
 });
 

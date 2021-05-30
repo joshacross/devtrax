@@ -1,3 +1,5 @@
+
+// // Signup Function
 // async function signupFormHandler(event) {
 //     event.preventDefault();
 
@@ -6,10 +8,8 @@
 //     const lastName = document.querySelector('#lastname-signup').value.trim();
 //     const email = document.querySelector('#email-signup').value.trim();
 //     const password = document.querySelector('#password-signup').value.trim();
-//     const firstName = document.querySelector('#first_name').value.trim();
-//     const lastName = document.querySelector('#last_name').value.trim();
 
-//     if (username && email && password) {
+//     if (username && email && password && firstName && lastName ) {
 //       const response = await fetch('/api/users', {
 //         method: 'post',
 //         body: JSON.stringify({
@@ -31,34 +31,30 @@
 //     }
 //   }
 
-async function loginFormHandler(event) {
-  event.preventDefault();
+//   // Login Function
+// async function loginFormHandler(event) {
+//   event.preventDefault();
 
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
-  if (email && password) {
-    // const response = fetch('/api/users/login', {
-    //   method: 'post',
-    //   body: JSON.stringify({
-    //     email,
-    //     password
-    //   }),
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-    //   .then(res => res.json())
-    //   .then(json => { console.log('--------------------------------------'+ JSON.stringify(json)) 
-    //   if (json.ok) {document.location.replace('54325432');};
-    // });
+//   const email = document.querySelector('#email-login').value.trim();
+//   const password = document.querySelector('#password-login').value.trim();
+//   if (email && password) {
+//     const response = fetch('/api/users/login', {
+//       method: 'post',
+//       body: JSON.stringify({
+//         email,
+//         password
+//       }),
+//       headers: { 'Content-Type': 'application/json' }
+//     });
 
-    // if (response.ok) {
-      // console.log("response ok");
-      // document.location.replace('/');
-    // } else {
-    //   alert(response.statusText);
-    // }
-    document.location.replace('/profile/4');
-  }
-}
+//     // check the response status
+//     if (response.ok) {
+//       document.location.replace('/');
+//     } else {
+//       alert(response.statusText);
+//     }
+//   }
+// }
 
 // document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
-document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+// document.querySelector('.login-form').addEventListener('submit', loginFormHandler);

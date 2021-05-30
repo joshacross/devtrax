@@ -56,7 +56,15 @@ User.init(
                 // password is at least four characters long
                 len: [4]
             }
+        },
+        nickname: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
+        // auth: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // }
     },
     {
         hooks: {
