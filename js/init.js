@@ -7,6 +7,9 @@
 })(jQuery); // end of jQuery name space
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> becd65e644dfa194cfd72465fe1141031013cf15
 
 var searchBar = function() {
   var input = $('#search');
@@ -29,6 +32,7 @@ var searchBar = function() {
 }
 
 
+<<<<<<< HEAD
 =======
 var calendar = $('#calendar');
 var daysInMonth = function()  {
@@ -43,3 +47,5 @@ for (var day = 1; day < 32; day++){
   calendar.append(dayEl);
 }
 >>>>>>> 55b2b8459ce341d7a0b6546506f17c7ec873e200
+=======
+>>>>>>> becd65e644dfa194cfd72465fe1141031013cf15

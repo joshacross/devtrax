@@ -40,7 +40,11 @@ async function contractFormHandler(event) {
 
     if (response.ok) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         document.location.replace('/profile/:id');
+=======
+        document.location.replace('/profile');
+>>>>>>> becd65e644dfa194cfd72465fe1141031013cf15
 =======
         document.location.replace('/profile');
 >>>>>>> becd65e644dfa194cfd72465fe1141031013cf15

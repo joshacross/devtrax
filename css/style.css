@@ -11,6 +11,7 @@
 }
 .icon-block .material-icons {
 	font-size: inherit;
+<<<<<<< HEAD
 }
 
 
@@ -20,3 +21,6 @@
   grid-template-rows: repeat(5, 1fr);
   height: 100%;
 } */
+=======
+}
+>>>>>>> becd65e644dfa194cfd72465fe1141031013cf15

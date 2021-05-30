@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # DevTrax
 
 
@@ -102,6 +103,12 @@ https://infinite-shore-33875.herokuapp.com/
 ##Reference Images
 <img>
 >>>>>>> 0bb70f4292cf2351524b9675afe73e89679605a0
+=======
+# devtrax
+
+## Deployed Application:
+ https://infinite-shore-33875.herokuapp.com/ 
+>>>>>>> becd65e644dfa194cfd72465fe1141031013cf15
 =======
 # devtrax
 
