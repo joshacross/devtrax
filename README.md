@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # DevTrax
 
 
   ## Licensing:
   [![license](https://img.shields.io/badge/license-Apache-blue)](https://shields.io)
+
   ## Table of Contents 
   - [Description](#description)
   - [Installation](#installation)
@@ -13,8 +11,13 @@
   - [Contributing](#contributing)
   - [Tests](#tests)
   - [Questions](#questions)
-  ## Description:
-  DevTrax is a web based application intended to ease the process of drafting and presenting contracts for freelance work specifically in the area of web development.  
+
+  ## Description
+  DevTrax is a fully responsive, full-stack, client-side web application deployed to Heroku Server. With DevTrax, user's are able to auto-generate contracts by simply filling out a form with client and project details. Once form has been filled out, it will generate a contract URL for their client(s) to sign.
+
+  Once their client signs, contract will become active from the date client signed and an uneditable version can be referenced at anytime.
+
+  Devtrax also offers a project calendar view, allowing them to overview project's length. 
   
   ## Installation:
   There are no installation requirements.
@@ -28,7 +31,7 @@
   ## Tests:
   n/a
   ## Questions:
-  Below are links to my Github page and email in case you would like to contact me or my team-mates have any further questions.
+  Below are links to our Github pages in case you would like to contact any of our team members or have any further questions.
 
   - Github: <br>[Will](https://github.com/wberry86),<br>
             [Joshua](https://github.com/joshuacross),<br>
@@ -37,7 +40,6 @@
             [Ben](https://github.com/bsottek),<br>
             [Durrelle](https://github.com/Wilhite27)
             
-  - Email: wberry86@gmail.com
 
 
 [![Screenshot-1.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax1.PNG)]
@@ -45,18 +47,7 @@
 [![Screenshot-2.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax2.PNG)]
 
 [![Screenshot-3.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax3.PNG)]
-
-[![Screenshot-4.png](https://github.com/joshacross/devtrax/blob/feature/readme/assets/devtrax4.PNG)]
 =======
-# devtrax
-<img>
-
-## Description
-DevTrax is a fully responsive, full-stack, client-side web application deployed to Heroku Server. With DevTrax, user's are able to auto-generate contracts by simply filling out a form with client and project details. Once form has been filled out, it will generate a contract URL for their client(s) to sign.
-
-Once their client signs, contract will become active from the date client signed and an uneditable version can be referenced at anytime.
-
-Devtrax also offers a project calendar view, allowing them to overview project's length.
 
 ## Future Development
 * Payment Processing
@@ -100,18 +91,6 @@ Devtrax also offers a project calendar view, allowing them to overview project's
 ## Deployed Application
 https://infinite-shore-33875.herokuapp.com/ 
 
-##Reference Images
-<img>
->>>>>>> 0bb70f4292cf2351524b9675afe73e89679605a0
-=======
-# devtrax
 
-## Deployed Application:
- https://infinite-shore-33875.herokuapp.com/ 
->>>>>>> becd65e644dfa194cfd72465fe1141031013cf15
-=======
-# devtrax
 
-## Deployed Application:
- https://infinite-shore-33875.herokuapp.com/ 
->>>>>>> becd65e644dfa194cfd72465fe1141031013cf15
+

@@ -1,12 +1,43 @@
-// const path = require('path');
-// const express = require('express');
-// const expressSession = require('express-session');
+// Configure express-session variables
+const express = require("express");
+const path = require("path");
+
+const expressSession = require("express-session");
+const passport = require("passport");
+const Auth0Strategy = require("passport-auth0");
+
+require("dotenv").config();
+
+//setup app and port
+ const app = express();
+ const port = process.env.PORT || "8000";
+
+
+ const session = {
+   secret: process.env.SESSION_SECRET,
+   cookie: {},
+   resave: false,
+   saveUninitialized: false
+ };
+
+ if (app.get("env") === "production") {
+   // Serve secure cookies, requires HTTPS
+   session.cookie.secure = true;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const exphbs = require('express-handlebars');
-
-// const app = express();
-
-// // const PORT = process.env.PORT || 3001;
-// const PORT = process.env.PORT || "8000";
 
 // const sequelize = require("./config/connection");
 // const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -20,16 +51,6 @@
 //     db: sequelize
 //   })
 // };
-
-// // if (app.get('env') === "production") {
-// //   // serve secure cookies, requires HTTPS
-// //   session.cookie.secure = true;
-// // };
-
-// const passport = require('passport');
-// const Auth0Strategy = require('passport-auth0');
-
-// require('dotenv').config();
 
 // const authRouter = require('./controllers/api/auth.js');
 
@@ -102,38 +123,12 @@
  * Required External Modules
  */
 
-// Configure express-session variables
- const express = require("express");
- const path = require("path");
- 
- const expressSession = require("express-session");
- const passport = require("passport");
- const Auth0Strategy = require("passport-auth0");
-
- require("dotenv").config();
-
- //setup app and port
-  const app = express();
-  const port = process.env.PORT || "8000";
-
-  
 /**
  * Session Configuration (New!)
  */
 
 // configure expressSession
-  const session = {
-    secret: process.env.SESSION_SECRET,
-    cookie: {},
-    resave: false,
-    saveUninitialized: false
-  };
-
-  if (app.get("env") === "production") {
-    // Serve secure cookies, requires HTTPS
-    session.cookie.secure = true;
-  }
-
+  
   
 /**
  * Passport Configuration (New!)
