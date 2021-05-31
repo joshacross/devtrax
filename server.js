@@ -116,9 +116,9 @@ app.use((req, res, next) => {
 };
 
 // Defined routes
-app.get("/user", secured, (req, res, next) => {
+app.get("/profile", secured, (req, res, next) => {
   const { _raw, _json, ...userProfile } = req.user;
-  res.render("user", {
+  res.render("profile", {
     title: "Profile",
     userProfile: userProfile
   });
