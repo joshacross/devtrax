@@ -18,7 +18,7 @@ require('dotenv').config();
 // Home Page , if logged in go to user's profile, if not redirect to login
 router.get('/', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/profile/' + req.session.user_id);
+    res.redirect('/profile');
     return;
   }
   res.redirect('/login');
@@ -59,7 +59,7 @@ router.get('/login', (req, res) => {
     // if(user !exists){
     //   // post new user;
     // }
-    res.redirect('/profile/' + req.session.user_id);
+    res.redirect('/profile');
     return;
 
   } else {
@@ -67,39 +67,39 @@ router.get('/login', (req, res) => {
   }
 });
 
-// Login Post Route, by 
-router.post('/login', (req, res) => {
-  User.findOne({
-    where: {
-      email: req.session.email
-    }
-  }).then(dbUserData => {
-    if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
-      return;
-    }
+// // Login Post Route, by 
+// router.post('/login', (req, res) => {
+//   User.findOne({
+//     where: {
+//       email: req.session.email
+//     }
+//   }).then(dbUserData => {
+//     if (!dbUserData) {
+//       res.status(400).json({ message: 'No user with that email address!' });
+//       return;
+//     }
 
-    const validPassword = dbUserData.checkPassword(req.body.password);
+//     const validPassword = dbUserData.checkPassword(req.body.password);
 
-    if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
-      return;
-    }
+//     if (!validPassword) {
+//       res.status(400).json({ message: 'Incorrect password!' });
+//       return;
+//     }
 
-    req.session.save(() => {
-      // declare session variables
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
+//     req.session.save(() => {
+//       // declare session variables
+//       req.session.user_id = dbUserData.id;
+//       req.session.username = dbUserData.username;
+//       req.session.loggedIn = true;
 
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
-    });
-  });
-});
+//       res.json({ user: dbUserData, message: 'You are now logged in!' });
+//     });
+//   });
+// });
 
-router.get('/logout', (req, res) => {
-  res.render('login');
-})
+// router.get('/logout', (req, res) => {
+//   res.render('login');
+// })
 
 //Contracts Page 
 router.get('/contracts', (req, res) => {

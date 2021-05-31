@@ -26,11 +26,9 @@ User.init(
         },
         first_name: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         last_name: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         // define username
         username: {
@@ -57,10 +55,10 @@ User.init(
                 len: [4]
             }
         },
-        nickname: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
+        // nickname: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        // }
         // auth: {
         //     type: DataTypes.STRING,
         //     allowNull: false

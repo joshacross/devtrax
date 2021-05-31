@@ -21,7 +21,7 @@
     scope: "openid email profile"
   }),
   (req, res) => {
-    res.redirect("/" + req.session.user_id);
+    res.redirect("/");
     // res.render('/');
   }
 );
