@@ -1,5 +1,5 @@
-# devtrax
-<img>
+# Devtrax - Automate Contracts
+<img src="./public/assets/login.png" width="70%">
 
 ## Description
 DevTrax is a fully responsive, full-stack, client-side web application deployed to Heroku Server. With DevTrax, user's are able to auto-generate contracts by simply filling out a form with client and project details. Once form has been filled out, it will generate a contract URL for their client(s) to sign.
@@ -50,5 +50,9 @@ Devtrax also offers a project calendar view, allowing them to overview project's
 ## Deployed Application
 https://infinite-shore-33875.herokuapp.com/ 
 
-##Reference Images
-<img>
+## Reference Images
+
+<img src="./public/assets/login.png" width="70%">
+<img src="public/assets/homedesktop.png" width="70%">
+<img src="public/assets/homemobile.png" width="50%">
+<img src="public/assets/contracts.png" width="50%">
