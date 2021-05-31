@@ -2,6 +2,8 @@
  * Required External Modules
  */
 
+ const { auth } = require('express-openid-connect');
+
  const exphbs = require('express-handlebars');
 
  const sequelize = require("./config/connection");
@@ -54,6 +56,8 @@ if (app.get("env") === "production") {
  */
  const strategy = new Auth0Strategy(
   {
+    authRequired: false,
+    auth0Logout: true,
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
@@ -71,7 +75,6 @@ if (app.get("env") === "production") {
     return done(null, profile);
   }
 );
-
 
 /**
  *  App Configuration
