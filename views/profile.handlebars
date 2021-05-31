@@ -32,10 +32,9 @@
                 <div class="background">
                     <img src="../assets/background-profile.png">
                 </div>
-                <a href="/profile-page"><img class="circle" src="../assets/profile-icon.png"></a>
-                <a href="/profile-page"><span class="white-text name">{{user.dataValues.first_name}}
-                        {{user.dataValues.last_name}}</span></a>
-                <a href="/profile-page"><span class="white-text email">{{user.dataValues.username}}</span></a>
+                <a href="#"><img class="circle" src="../assets/profile-icon.png"></a>
+                <a href="#"><span class="white-text name">{{req.session.passport.user.displayName}}</span></a>
+                <br>
             </div>
         </li>
         <li><a href="/history"><i class="material-icons">history</i>History</a></li>
