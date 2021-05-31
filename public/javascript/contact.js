@@ -14,8 +14,9 @@ async function contractFormHandler(event) {
     const project_title = document.querySelector('#project_title').value.trim();
     const project_description = document.querySelector('#project_description').value.trim();
     const fee_schedule = document.querySelector('#fee_schedule').value.trim();
+    const user_id = req.session.passport.user.user_id;
 
-    const response = await fetch(`/api/project`, {
+    const response = await fetch(`/api/project/`, {
         method: 'POST',
         body: JSON.stringify({
             client_first_name,
@@ -30,7 +31,8 @@ async function contractFormHandler(event) {
             total_price_of_project,
             project_title,
             project_description,
-            fee_schedule
+            fee_schedule,
+            user_id
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -38,7 +40,7 @@ async function contractFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/profile');
+        document.location.replace('/');
       } else {
         alert(response.statusText);
       }

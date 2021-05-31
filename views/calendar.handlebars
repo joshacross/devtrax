@@ -1,0 +1,96 @@
+<link href='node_modules/fullcalendar/lib/main.css' rel='stylesheet' />
+<style>
+
+body {
+margin-top: 40px;
+font-size: 14px;
+font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+#external-events {
+position: fixed;
+left: 24px;
+height: 345px;
+padding: 21px;
+border: 1px solid #ccc;
+background: #eee;
+text-align: left;
+}
+
+.green-text {
+  color: #4CAF50
+}
+
+#external-events h4 {
+font-size: 16px;
+margin-top: 0;
+padding-top: 2em;
+}
+
+#external-events .fc-event {
+margin: 3px 0;
+cursor: move;
+}
+
+#external-events p {
+margin: 1.5em 0;
+font-size: 11px;
+color: #666;
+}
+
+#external-events p input {
+margin: 0;
+vertical-align: middle;
+}
+
+#calendar-wrap {
+margin-left: 171px;
+}
+
+#calendar {
+max-width: 1100px;
+margin: 0 auto;
+}
+.saveBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #06AED5;
+  color: white;
+}
+</style>
+<nav class="green" role="navigation">
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo">DevTrax</a>
+    </div>
+</nav>
+<div id='wrap'>
+
+<div id='external-events'>
+  <h4 class="black-text">Dev<span class="green-text">Trax(s)</span</h4>
+
+ <!--contracts submitted-->
+{{#each projects}}
+  <div id='external-events-list'>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+      <div class='fc-event-main'>{{dataValues.project_title}}</div>
+    </div>
+  </div>
+  {{/each}}
+
+  <p>
+    <input type='checkbox' id='drop-remove' />
+    <label for='drop-remove'>remove after drop</label>
+  </p>
+  <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Save</a>
+</div>
+
+<div id='calendar-wrap'>
+    <!--Calendar-->
+  <div id='calendar'></div>
+</div>
+
+</div>
+<script src='node_modules/fullcalendar/main.js'></script>
+<script src="/javascript/calendar.js"></script>
