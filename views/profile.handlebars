@@ -126,3 +126,23 @@
         </main>
     </div>
 </div>
+<script>
+    const contractSigned = document.getElementById('contract-status');
+    const signatureDoc = document.getElementById('signature');
+
+    checkMark (contractSigned) => {
+    if (contractSigned) {
+        const contractSignatureEl = document.createElement('i');
+        contractSignatureEl.classList.add('material-icons small green');
+        contractSignatureEl.innerHTML = 'check_box';
+        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
+        removeItem(signatureDoc);
+    } else {
+        const contractSignatureEl = document.createElement('i');
+        contractSignatureEl.classList.add('material-icons small red');
+        contractSignatureEl.innerHTML = 'check_box_outline_blank';
+        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
+    }
+    }
+    checkMark();
+</script>
