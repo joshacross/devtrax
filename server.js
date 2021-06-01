@@ -134,11 +134,23 @@
 //   console.error('Unable to connect to the database:', error);
 // });
 
-const express = require('express');
-const app = express();
+/* Variable Declarations */
+//  const exphbs = require('express-handlebars');
 
-require('dotenv').config(); 
-const { auth, requiresAuth } = require('express-openid-connect');
+//  const sequelize = require("./config/connection");
+
+//  const helpers = require('./utils/helpers');
+
+//  const hbs = exphbs.create({ helpers });
+
+ const express = require('express');
+//  const path = require("path");
+//  const passport = require("passport");
+
+ const app = express();
+
+ require('dotenv').config(); 
+ const { auth, requiresAuth } = require('express-openid-connect');
 
 app.use(
   auth({
@@ -159,7 +171,42 @@ app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user))
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log('listening on port ${port}');
+app.use(
+  auth({
+    authRequired: false,
+  })
+);
+
+// Anyone can access the clientLogin
+app.get('/client', (req, res) => {
+  res.send('<a href="/client">Client Section</a>');
 });
+
+// requiresAuth checks authentication.
+app.get('/admin', requiresAuth(), (req, res) =>
+  res.send(`Hello ${req.oidc.user.sub}, this is the admin section.`)
+);
+
+
+
+// // Defined routes
+// app.get("/", requiresAuth(), (req, res) => {
+//   const { _raw, _json, ...userProfile } = req.user;
+//   res.render("index", {
+//     title: "Home",
+//     userProfile: userProfile
+//   });
+// });
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
+
+//  sequelize.sync({ force: false }).then(() => {
+//   app.listen(port, () => console.log('Now listening'));
+// })
+// .catch((error) => {
+//   console.error('Unable to connect to the database:', error);
+// });

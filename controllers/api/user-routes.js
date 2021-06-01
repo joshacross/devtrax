@@ -154,29 +154,33 @@ router.get('/user', secured(), (req, res, next) => {
     const { _raw, _json, ...userProfile } = req.user;
   res.render('user', {
     userProfile: JSON.stringify(userProfile, null, 2),
+    rawData: JSON.stringify(_raw, null, 2),
     title: 'Profile page'
   });
 });
 
-router.post('/user', secured(), (req, res, next) => {
-    User.create({
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password
-        })
-          .then(dbUserData => {
-            req.session.save(() => {
-              req.session.user_id = dbUserData.id;
-              req.session.username = dbUserData.username;
-              req.session.loggedIn = true;
+// router.post('/user', secured(), (req, res, next) => {
+//     const { _raw, _json, ...userProfile } = req.user;
+//     User.create({
+//           firstName: userProfile._raw.
+//           username: userProfile.sub,
+//           email: userProfile.email,
+//           email_verified: userProfile.email_verified,
+
+//         })
+//           .then(dbUserData => {
+//             req.session.save(() => {
+//               req.session.user_id = dbUserData.id;
+//               req.session.username = dbUserData.username;
+//               req.session.loggedIn = true;
         
-              res.json(dbUserData);
-            });
-          })
-          .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-          });
-      });
+//               res.json(dbUserData);
+//             });
+//           })
+//           .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//           });
+//       });
 
 module.exports = router;
