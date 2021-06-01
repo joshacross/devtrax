@@ -6,11 +6,14 @@
  const express = require("express");
  const router = express.Router();
  const passport = require("passport");
+ const dotenv = require('dotenv');
+ const util = require('util');
+ const url = require('url');
  const querystring = require("querystring");
 //  const sequelize = require('../config/connection');
 //   const { Project, User } = require('../models');
  
- require("dotenv").config();
+dotenv.config();
 
 /**
  * Routes Definitions
@@ -23,8 +26,7 @@
   (req, res) => {
     res.redirect("/");
     // res.render('/');
-  }
-);
+  });
 
 router.get("/callback", (req, res, next) => {
   passport.authenticate("auth0", (err, user, info) => {
@@ -55,19 +57,14 @@ router.get("/logout", (req, res) => {
   const port = req.connection.localPort;
 
   if (port !== undefined && port !== 80 && port !== 443) {
-    returnTo =
-      process.env.NODE_ENV === "production"
-        ? `${returnTo}/`
-        : `${returnTo}:${port}/`;
+    returnTo += ':' + port;
   }
-
-  const logoutURL = new URL(
-    'https://${process.env.AUTH0_DOMAIN}/v2/logout'
+  const logoutURL = new url.URL(
+    util.format('https://%s/v2/logout', process.env.AUTH0_DOMAIN)
   );
-
   const searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
-    returnTo: "localhost:3001"
+    returnTo: returnTo
   });
   logoutURL.search = searchString;
 
@@ -80,3 +77,11 @@ router.get("/logout", (req, res) => {
  */
 
 module.exports = router;
+
+module.exports = function () {
+  return function secured (req, res, next) {
+    if (req.user) { return next(); }
+    req.session.returnTo = req.originalUrl;
+    res.redirect('/login');
+  };
+};
