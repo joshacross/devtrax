@@ -109,12 +109,12 @@
                                     <div class="col s6">Contract Status:</div>
                                     <div class="col s6" id="contract-status">{{dataValues.contract_signed}}</div>
                                 </div>
-                                <div class="row">
+                                <div class="row" id="signature">
                                     <div class="col s6"><a href="contract/signature-required/{{dataValues.project_id}}">Signature Required</a></div>
                                 </div>
                             </div>
                             <div class="card-action">
-                                <a href="/client-contract/{{dataValues.project_id}}">Click to Open Contract</a>
+                                <a href="contract/{{dataValues.project_id}}">Click to Open Contract</a>
                             </div>
                         </div>
                     </div>
@@ -129,12 +129,21 @@
 
 <script>
     const contractSigned = document.getElementById('contract-status');
-    const contractSignatureEl = document.createElement('i');
-    contractSignatureEl.classList.add('material-icons small');
-    contractSignatureEl.innerHTML = 'check_box';
+    const signatureDoc = document.getElementById('signature');
 
-
-    if (contractSigned) => {
+    checkMark (contractSigned) => {
+    if (contractSigned) {
+        const contractSignatureEl = document.createElement('i');
+        contractSignatureEl.classList.add('material-icons small green');
+        contractSignatureEl.innerHTML = 'check_box';
+        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
+        removeItem(signatureDoc);
+    } else {
+        const contractSignatureEl = document.createElement('i');
+        contractSignatureEl.classList.add('material-icons small red');
+        contractSignatureEl.innerHTML = 'check_box_outline_blank';
         contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
     }
+    }
+    checkMark();
 </script>
