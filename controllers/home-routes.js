@@ -15,18 +15,16 @@ require('dotenv').config();
 // );
 
 
-// Home Page , if logged in go to user's profile, if not redirect to login
+// Home Page , if logged in go to homepage (index.handlebars), if not redirect to login to trigger Auth0
 router.get('/', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/profile');
+    res.redirect('/');
     return;
   }
   res.redirect('/login');
 });
 
-// If logged in, redirect to '/' which redirects to user profile
-// If not logged in, render login page.
-
+// login route (verification), if 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
   // if (req.session.loggedIn) {
@@ -59,7 +57,7 @@ router.get('/login', (req, res) => {
     // if(user !exists){
     //   // post new user;
     // }
-    res.redirect('/profile');
+    res.redirect('/');
     return;
 
   } else {
@@ -67,53 +65,7 @@ router.get('/login', (req, res) => {
   }
 });
 
-// // Login Post Route, by 
-// router.post('/login', (req, res) => {
-//   User.findOne({
-//     where: {
-//       email: req.session.email
-//     }
-//   }).then(dbUserData => {
-//     if (!dbUserData) {
-//       res.status(400).json({ message: 'No user with that email address!' });
-//       return;
-//     }
-
-//     const validPassword = dbUserData.checkPassword(req.body.password);
-
-//     if (!validPassword) {
-//       res.status(400).json({ message: 'Incorrect password!' });
-//       return;
-//     }
-
-//     req.session.save(() => {
-//       // declare session variables
-//       req.session.user_id = dbUserData.id;
-//       req.session.username = dbUserData.username;
-//       req.session.loggedIn = true;
-
-//       res.json({ user: dbUserData, message: 'You are now logged in!' });
-//     });
-//   });
-// });
-
-// router.get('/logout', (req, res) => {
-//   res.render('login');
-// })
-
-//Contracts Page 
-router.get('/contracts', (req, res) => {
-  res.render('contracts');
-  return;
-});
-
-//Signup Page
-router.get('/signup', (req, res) => {
-  res.render('signup');
-  return;
-});
-
-router.get('/profile/', (req, res) => {
+router.get('/profile', (req, res) => {
   console.log(req.session);
 
   Project.findAll({
@@ -152,7 +104,7 @@ router.get('/profile/', (req, res) => {
     .then(dbProjectData => {
         const projects = dbProjectData.map(project => project.get({ plain: true}));
       // pass a single post object into the homepage template
-      res.render('profile', { projects });
+      res.render('index', { projects });
     })
     .catch(err => {
       console.log(err);

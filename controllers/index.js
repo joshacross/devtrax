@@ -4,10 +4,13 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 
 const homeRoutes = require('./home-routes.js');
+const contractRoutes = require('./contract-routes.js');
 
 router.use('/api', apiRoutes);
 
 router.use('/', homeRoutes);
+
+router.use('/contract', contractRoutes);
 
 // Catch-all if a request is made to any endpoint that does not exist
 router.use((req, res) => {

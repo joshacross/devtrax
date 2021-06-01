@@ -140,17 +140,43 @@
 
 // module.exports = router;
 
-const express = require('express');
+const router = require('express').Router();
+const { User, Project } = require('../../models');
+
+const { create } = require('../../models/User');
 const secured = require('../lib/middleware/secured');
 const router = express.Router();
 
+
+
 /* GET user profile. */
-router.get('/user', secured(), function (req, res, next) {
-  const { _raw, _json, ...userProfile } = req.user;
+router.get('/user', secured(), (req, res, next) => {
+    const { _raw, _json, ...userProfile } = req.user;
   res.render('user', {
     userProfile: JSON.stringify(userProfile, null, 2),
     title: 'Profile page'
   });
 });
+
+router.post('/user', secured(), (req, res, next) => {
+    User.create({
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password
+        })
+          .then(dbUserData => {
+            req.session.save(() => {
+              req.session.user_id = dbUserData.id;
+              req.session.username = dbUserData.username;
+              req.session.loggedIn = true;
+        
+              res.json(dbUserData);
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+          });
+      });
 
 module.exports = router;
