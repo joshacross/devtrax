@@ -21,7 +21,7 @@
  
  require("dotenv").config();
  
- const authRouter = require("./controllers/api/auth");
+ const authRouter = require("./controllers/auth");
 
  /**
  * App Variables

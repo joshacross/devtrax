@@ -113,7 +113,7 @@ router.get('/signup', (req, res) => {
   return;
 });
 
-router.get('/profile/', (req, res) => {
+router.get('/profile', (req, res) => {
   console.log(req.session);
 
   Project.findAll({
@@ -178,7 +178,7 @@ router.get('/profile/:id', async (req, res) => {
   res.render("profile", { user, projects });
 });
 
-router.get('/', (req, res) => {
+router.get('/profile', (req, res) => {
   console.log(req.session);
 
   Project.findAll({
