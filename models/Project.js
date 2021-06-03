@@ -1,5 +1,5 @@
 // Import Model and DataTypes from Sequelize
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 // Import connection to MySql stored in connection.js inside the config folder
 const sequelize = require('../config/connection');
@@ -37,12 +37,17 @@ class Project extends Model {
               'contract_signed',
               'contract_created_date',
               'contract_signed_date',
+              'user_id',
+              'username',
+              'user_email',
+              'user_first_name',
+              'user_last_name',
               'created_at',
               'updated_at'
             ],
             include: {
                 model: models.User,
-                attributes: ['user_id', 'username', 'user_first_name', 'user_last_name']
+                attributes: ['user_id', 'username', 'user_first_name', 'user_last_name', 'auth']
                 }
               });
         });
@@ -130,15 +135,25 @@ Project.init(
             type: DataTypes.DATE
         },
         user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'user_id'
-            }
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        //Project Timestamps
-        createdAt: Sequelize.DATE,
-        updatedAt: Sequelize.DATE,
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        user_email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        user_first_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        user_last_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     },
     {
         sequelize,

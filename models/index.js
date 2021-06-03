@@ -6,11 +6,11 @@ const Project = require('./Project');
 
 // Users have many projects
 User.hasMany(Project, {
-    foreignKey: 'user_id'
+    foreignKey: 'auth'
 });
 
 Project.belongsTo(User, {
-    foreignKey: 'user_id',
+    foreignKey: 'auth',
     onDelete: 'SET NULL'
 });
 

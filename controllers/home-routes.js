@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Project, User } = require('../models');
+const { Project } = require('../models');
 const passport = require('passport');
 require('dotenv').config();
 
@@ -107,11 +107,11 @@ router.get('/contracts', (req, res) => {
   return;
 });
 
-//Signup Page
-router.get('/signup', (req, res) => {
-  res.render('signup');
-  return;
-});
+// //Signup Page
+// router.get('/signup', (req, res) => {
+//   res.render('signup');
+//   return;
+// });
 
 router.get('/profile', (req, res) => {
   console.log(req.session);
@@ -139,15 +139,20 @@ router.get('/profile', (req, res) => {
       'contract_signed',
       'contract_created_date',
       'contract_signed_date',
+      'user_id',
+      'username',
+      'user_email',
+      'user_first_name',
+      'user_last_name',
       'created_at',
       'updated_at'
-    ],
-    include: [
-      {
-        model: User,
-        attributes: ['user_id', 'username', 'first_name', 'last_name']
-      }
     ]
+    // include: [
+    //   {
+    //     model: User,
+    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+    //   }
+    // ]
   })
     .then(dbProjectData => {
         const projects = dbProjectData.map(project => project.get({ plain: true}));
@@ -161,25 +166,18 @@ router.get('/profile', (req, res) => {
 });
 
 
-//GET /api/users/1
-router.get('/profile/:id', async (req, res) => {
-  let user = await User.findOne({
-    attibutes: { exclude: ['password'] },
-    where: {
-      user_id: req.params.id
-    },
-  });
+//GET /api/projects by user_id
+router.get('/profile', async (req, res) => {
   let projects = await Project.findAll({
     where: {
-      user_id: req.params.id
+      user_id: req.session.passport.user.user_id
     },
   })
-  console.log(projects);
-  res.render("profile", { user, projects });
+  res.render("profile", { projects });
 });
 
 router.get('/profile', (req, res) => {
-  console.log(req.session);
+  console.log(req.session.passport.user);
 
   Project.findAll({
     attributes: [
@@ -204,15 +202,20 @@ router.get('/profile', (req, res) => {
       'contract_signed',
       'contract_created_date',
       'contract_signed_date',
+      'user_id',
+      'username',
+      'user_email',
+      'user_first_name',
+      'user_last_name',
       'created_at',
       'updated_at'
-    ],
-    include: [
-      {
-        model: User,
-        attributes: ['user_id', 'username', 'first_name', 'last_name']
-      }
     ]
+    // include: [
+    //   {
+    //     model: User,
+    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+    //   }
+    // ]
   })
     .then(dbProjectData => {
       const projects = dbProjectData.map(project => project.get({ plain: true }));
@@ -254,19 +257,24 @@ router.get('/client-contract-signature/:id', (req, res) => {
       'contract_signed',
       'contract_created_date',
       'contract_signed_date',
+      'user_id',
+      'username',
+      'user_email',
+      'user_first_name',
+      'user_last_name',
       'created_at',
       'updated_at'
     ],
     // order projects based on the most recent project created_at date
-    order: [['created_at', 'DESC']],
+    order: [['created_at', 'DESC']]
     // JOIN to the user table using include
-    include: [
-      //include client model
-      {
-        model: User,
-        attributes: ['user_id', 'username', 'first_name', 'last_name']
-      }
-    ]
+    // include: [
+    //   //include client model
+    //   {
+    //     model: User,
+    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+    //   }
+    // ]
   })
     .then(dbProjectData => {
       if (!dbProjectData) {
@@ -310,19 +318,24 @@ router.get('/client-contract/:id', (req, res) => {
       'contract_signed',
       'contract_created_date',
       'contract_signed_date',
+      'user_id',
+      'username',
+      'user_email',
+      'user_first_name',
+      'user_last_name',
       'created_at',
       'updated_at'
     ],
     // order projects based on the most recent project created_at date
-    order: [['created_at', 'DESC']],
+    order: [['created_at', 'DESC']]
     // JOIN to the user table using include
-    include: [
-      //include client model
-      {
-        model: User,
-        attributes: ['user_id', 'username', 'first_name', 'last_name']
-      }
-    ]
+    // include: [
+    //   //include client model
+    //   {
+    //     model: User,
+    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+    //   }
+    // ]
   })
     .then(dbProjectData => {
       if (!dbProjectData) {
@@ -337,8 +350,13 @@ router.get('/client-contract/:id', (req, res) => {
     });
 });
 
-router.get('/calendar', (req, res) => {
-  res.render('calendar');
-})
+router.get('/calendar', async (req, res) => {
+  let projects = await Project.findAll({
+    where: {
+      user_id: req.session.passport.user.user_id
+    },
+  })
+  res.render("profile", { projects });
+});
 
 module.exports = router;

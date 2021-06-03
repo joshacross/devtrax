@@ -7,8 +7,6 @@
  const router = express.Router();
  const passport = require("passport");
  const querystring = require("querystring");
-//  const sequelize = require('../config/connection');
-//   const { Project, User } = require('../models');
  
  require("dotenv").config();
 
@@ -40,13 +38,99 @@ router.get("/callback", (req, res, next) => {
       }
       const returnTo = req.session.returnTo;
       // delete req.session.returnTo;
-      userId = req.session.passport.user.id.substring(req.session.passport.user.id.length - 24 );
-// the user id is going to be pulled from the user database. 
+      // userId = req.session.passport.user.id.substring(req.session.passport.user.id.length - 24 );
+// the user id is going to be pulled from the user database.
+      // User.create({
+      //   username: req.session.passport.user.id,
+      //   first_name: req.body.first_name,
+      //   last_name: req.body.last_name,
+      //   email: req.body.email,
+      //   password: req.body.password,
+      //   nickname: req.session.passport.user.nickname,
+      // })
+      // .then(dbUserData => {
+      //   req.session.save(() => {
+      //   req.session.user_id = req.session.passport.user.id;
+      //   req.session.username = dbUserData.username;
+      //   req.session.email = dbUserData.email;
+      //   req.session.loggedIn = true;
 
-      res.redirect(returnTo || "/profile/" + userId);
+      //   res.render(dbUserData);
+      //   });
+      // });
+      res.redirect(returnTo || "/profile");
     });
   })(req, res, next);
 });
+
+// router.post('/', (req, res) => {
+//   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+//   User.create({
+//       username: req.body.username,
+//       first_name: req.body.first_name,
+//       last_name: req.body.last_name,
+//       email: req.body.email,
+//       password: req.body.password,
+//       nickname: req.session.passport.user.nickname,
+//   })
+//   .then(dbUserData => {
+//       req.session.save(() => {
+//       req.session.user_id = req.session.passport.user.id;
+//       req.session.username = dbUserData.username;
+//       req.session.email = dbUserData.email;
+//       req.session.loggedIn = true;
+
+//       res.json(dbUserData);
+//       });
+//   });
+// });
+
+// router.post('/login', (req, res) => {
+//   User.findOne({
+//       where: {
+//           email: req.body.email
+//       }
+//   }).then(dbUserData => {
+//       if (!dbUserData) {
+//           res.status(400).json({ message: 'No user with that email address!' });
+//           return;
+//       }
+
+//       // Verify User
+//       const validPassword = dbUserData.checkPassword(req.body.password);
+      
+//       if (!validPassword) {
+//           res.status(400).json({ message: 'Incorrect password!' });
+//           return;
+//       }
+
+//       req.session.save(() => {
+//           //declare session variables
+//           req.session.user_id = dbUserData.user_id;
+//           req.session.username = dbUserData.username;
+//           req.session.email = dbUserData.email;
+//           req.session.loggedIn = true;
+
+//       res.json({ user: dbUserDaclearta, message: 'You are now logged in!', ok: true });
+//       });
+//   });
+// });
+
+// router.post('/logout', (req, res) => {
+//   if (req.session.loggedIn) {
+//       req.session.destroy(() => {
+//           res.status(204).end();
+//       });
+//   }
+//   else {
+//       res.status(404).end();
+//   }
+// });
+
+router.get('/user', (req, res) => {
+  passport.authenticate('')
+  res.send(req.session.passport.user);
+})
 
 router.get("/logout", (req, res) => {
   req.logOut();
@@ -62,7 +146,7 @@ router.get("/logout", (req, res) => {
   }
 
   const logoutURL = new URL(
-    'https://${process.env.AUTH0_DOMAIN}/v2/logout'
+    `https://${process.env.AUTH0_DOMAIN}/v2/logout`
   );
 
   const searchString = querystring.stringify({

@@ -46,38 +46,16 @@ User.init(
                 isEmail: true
             }
         },
-        // define password
-        password: {
+        nickname: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                // password is at least four characters long
-                len: [4]
-            }
         },
-        // nickname: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        // }
-        // auth: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false
-        // }
+        auth: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     },
     {
-        hooks: {
-            // set up beforeCreate lifecycle "hook" functionality
-            async beforeCreate(newUserData) {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
-            },
-
-            // setup beforeUpdate lifecycle "hook" functionality
-            async beforeUpdate(updatedUserData) {
-                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-                return updatedUserData;
-            }
-        },
         // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
     
         // pass in our imported sequelize connection (the direct connection to our database)
