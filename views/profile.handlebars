@@ -130,18 +130,18 @@
     const contractSigned = document.getElementById('contract-status');
     const signatureDoc = document.getElementById('signature');
 
-    checkMark (contractSigned) => {
+    function checkMark(contractSigned) {
     if (contractSigned) {
         const contractSignatureEl = document.createElement('i');
-        contractSignatureEl.classList.add('material-icons small green');
+        contractSignatureEl.classList.add('material-icons', 'small', 'blue');
         contractSignatureEl.innerHTML = 'check_box';
-        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
+        contractSigned.appendChild(contractSignatureEl, contractSigned);
         removeItem(signatureDoc);
     } else {
         const contractSignatureEl = document.createElement('i');
-        contractSignatureEl.classList.add('material-icons small red');
+        contractSignatureEl.classList.add('material-icons', 'small', 'red');
         contractSignatureEl.innerHTML = 'check_box_outline_blank';
-        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
+        contractSigned.appendChild(contractSignatureEl, contractSigned);
     }
     }
     checkMark();
