@@ -113,60 +113,60 @@ router.get('/contracts', (req, res) => {
 //   return;
 // });
 
-router.get('/profile', (req, res) => {
-  console.log(req.session);
+// router.get('/profile', (req, res) => {
+//   console.log(req.session);
 
-  Project.findAll({
-    attributes: [
-      'project_id',
-      'project_url',
-      'project_title',
-      'project_description',
-      'services_rendered',
-      'services_rendered_description',
-      'project_start_date',
-      'project_completion_date',
-      'total_price_of_project',
-      'fee_schedule',
-      'length_of_project',
-      'client_first_name',
-      'client_last_name',
-      'client_email_address',
-      'client_company_name',
-      'client_billing_address',
-      'client_city',
-      'client_zipcode',
-      'contract_signed',
-      'contract_created_date',
-      'contract_signed_date',
-      'user_id',
-      'username',
-      'user_email',
-      'user_first_name',
-      'user_last_name',
-      'created_at',
-      'updated_at'
-    ]
-    // include: [
-    //   {
-    //     model: User,
-    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
-    //   }
-    // ]
-  })
-    .then(dbProjectData => {
-        const projects = dbProjectData.map(project => project.get({ plain: true}));
-      // pass a single post object into the homepage template
-      res.render('profile', { projects });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+//   Project.findAll({
+//     attributes: [
+//       'project_id',
+//       'project_url',
+//       'project_title',
+//       'project_description',
+//       'services_rendered',
+//       'services_rendered_description',
+//       'project_start_date',
+//       'project_completion_date',
+//       'total_price_of_project',
+//       'fee_schedule',
+//       'length_of_project',
+//       'client_first_name',
+//       'client_last_name',
+//       'client_email_address',
+//       'client_company_name',
+//       'client_billing_address',
+//       'client_city',
+//       'client_zipcode',
+//       'contract_signed',
+//       'contract_created_date',
+//       'contract_signed_date',
+//       'user_id',
+//       'username',
+//       'user_email',
+//       'user_first_name',
+//       'user_last_name',
+//       'created_at',
+//       'updated_at'
+//     ]
+//     // include: [
+//     //   {
+//     //     model: User,
+//     //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+//     //   }
+//     // ]
+//   })
+//     .then(dbProjectData => {
+//         const projects = dbProjectData.map(project => project.get({ plain: true}));
+//       // pass a single post object into the homepage template
+//       res.render('profile', { projects });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 
-//GET /api/projects by user_id
+// GET /api/projects by user_id
 router.get('/profile', async (req, res) => {
   let projects = await Project.findAll({
     where: {
@@ -174,12 +174,15 @@ router.get('/profile', async (req, res) => {
     },
   })
   res.render("profile", { projects });
+  return;
 });
 
 router.get('/profile', (req, res) => {
-  console.log(req.session.passport.user);
-
+  // console.log(req.session.passport.user);
   Project.findAll({
+    where: {
+      user_id: req.session.passport.user.user_id
+    },
     attributes: [
       'project_id',
       'project_url',
@@ -218,9 +221,13 @@ router.get('/profile', (req, res) => {
     // ]
   })
     .then(dbProjectData => {
+      if (!dbProjectData) {
+        res.redirect('/project');
+      }
       const projects = dbProjectData.map(project => project.get({ plain: true }));
       // pass a single post object into the homepage template
       res.render('project', { projects });
+      return;
     })
     .catch(err => {
       console.log(err);
