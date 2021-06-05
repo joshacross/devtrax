@@ -1,5 +1,5 @@
 // const User = require('./User');
-// const Project = require('./Project');
+const Project = require('./Project');
 // // const Client = require('./Client');
 
 // // // define and create model associations
@@ -35,4 +35,4 @@
 // //     foreignKey: 'client_id'
 // // });
 
-// module.exports = { User, Project };
+module.exports = { Project };

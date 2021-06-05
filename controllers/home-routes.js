@@ -167,18 +167,22 @@ router.get('/contracts', (req, res) => {
 
 
 // GET /api/projects by user_id
-router.get('/profile', async (req, res) => {
-  let projects = await Project.findAll({
-    where: {
-      user_id: req.session.passport.user.user_id
-    },
-  })
-  res.render("profile", { projects });
-  return;
-});
+// router.get('/profile', async (req, res) => {
+//   let projects = await Project.findAll({
+//     where: {
+//       user_id: req.session.passport.user.user_id
+//     },
+//   })
+//   res.render("profile", { projects });
+//   return;
+// });
 
 router.get('/profile', (req, res) => {
-  // console.log(req.session.passport.user);
+  // Ping Database by session id to find projects.
+  // If project doesn't exist, render profile page
+  // If project exists, render dbProjectData 
+
+  console.log(req.session.passport.user);
   Project.findAll({
     where: {
       user_id: req.session.passport.user.user_id
@@ -222,12 +226,14 @@ router.get('/profile', (req, res) => {
   })
     .then(dbProjectData => {
       if (!dbProjectData) {
-        res.redirect('/project');
-      }
+        res.render('profile');
+        return;
+      } else {
       const projects = dbProjectData.map(project => project.get({ plain: true }));
       // pass a single post object into the homepage template
-      res.render('project', { projects });
+      res.render('profile', { projects });
       return;
+      }
     })
     .catch(err => {
       console.log(err);
@@ -363,7 +369,7 @@ router.get('/calendar', async (req, res) => {
       user_id: req.session.passport.user.user_id
     },
   })
-  res.render("profile", { projects });
+  res.render("calendar", { projects });
 });
 
 module.exports = router;

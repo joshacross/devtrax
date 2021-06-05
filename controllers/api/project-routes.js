@@ -1,7 +1,9 @@
 const router = require('express').Router();
-const { Project, User, Client } = require('../../models');
+const { Project } = require('../../models');
 const sequelize = require('../../config/connection');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
+const { authenticate } = require('passport');
+const passport = require('passport');
 
 // get all users
 router.get('/', (req, res) => {
@@ -139,9 +141,9 @@ router.post('/', (req, res) => {
       contract_signed: req.body.contract_signed,
       contract_created_date: req.body.contract_created_date,
       contract_signed_date: req.body.contract_signed_date,
-      user_id: req.session.passport.user.user_id,
-      username: req.session.passport.user._json.nickname,
-      user_email: req.session.passport.user._json.email,
+      user_id: req.body.user_id,
+      username: req.body.username,
+      user_email: req.body.user_email,
       user_first_name: req.body.user_first_name,
       user_last_name: req.body.user_last_name
     })
