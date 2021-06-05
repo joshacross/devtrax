@@ -157,7 +157,7 @@ Project.init(
         sequelize,
         freezeTabName: true,
         underscored: true,
-        modelName: 'project'
+        modelName: 'Project'
     });
 
 module.exports = Project;

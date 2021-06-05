@@ -4,15 +4,15 @@ const { Project } = require('../models');
 const passport = require('passport');
 require('dotenv').config();
 
-// router.get(
-//   "/",
-//   passport.authenticate("auth0", {
-//     scope: "openid email profile"
-//   }),
-//   (req, res) => {
-//     res.render('profile');
-//   }
-// );
+router.get(
+  "/",
+  passport.authenticate("auth0", {
+    scope: "openid email profile"
+  }),
+  (req, res) => {
+    res.render('profile');
+  }
+);
 
 
 // Home Page , if logged in go to user's profile, if not redirect to login
@@ -178,14 +178,14 @@ router.get('/contracts', (req, res) => {
 // });
 
 router.get('/profile', (req, res) => {
+  const userDataId = req.session.passport.user.user_id;
   // Ping Database by session id to find projects.
   // If project doesn't exist, render profile page
   // If project exists, render dbProjectData 
-
-  console.log(req.session.passport.user);
+  console.log(userDataId);
   Project.findAll({
     where: {
-      user_id: req.session.passport.user.user_id
+      user_id: userDataId
     },
     attributes: [
       'project_id',

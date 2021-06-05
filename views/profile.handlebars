@@ -90,31 +90,31 @@
                     <div class="col s12 m6 l6 contract-card" id='contract-card-1'>
                         <div class="card green lighten-1">
                             <div class="card-content white-text">
-                                <span class="card-title">{{dataValues.client_first_name}}
-                                    {{dataValues.client_last_name}} - {{dataValues.project_title}}</span>
+                                <span class="card-title">{{client_first_name}}
+                                    {{client_last_name}} - {{project_title}}</span>
                                 <div class="row">
                                     <div class="col s6">Contract Dates:</div>
-                                    <div class="col s6" id="contract-dates">{{dataValues.project_start_date}} -
-                                        {{dataValues.project_completion_date}}</div>
+                                    <div class="col s6" id="contract-dates">{{project_start_date}} -
+                                        {{project_completion_date}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col s6">Fee Structure:</div>
-                                    <div class="col s6" id="contract-fee-structre">{{dataValues.fee_schedule}}</div>
+                                    <div class="col s6" id="contract-fee-structre">{{fee_schedule}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col s6">Rate:</div>
-                                    <div class="col s6" id="contract-rate">{{dataValues.total_price_of_project}}</div>
+                                    <div class="col s6" id="contract-rate">{{total_price_of_project}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col s6">Contract Status:</div>
-                                    <div class="col s6" id="contract-status">{{dataValues.contract_signed}}</div>
+                                    <div class="col s6" id="contract-status">{{contract_signed}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s6"><a href="/client-contract-signature/{{dataValues.project_id}}">Signature Required</a></div>
+                                    <div class="col s6"><a href="/client-contract-signature/{{project_id}}">Signature Required</a></div>
                                 </div>
                             </div>
                             <div class="card-action">
-                                <a href="/client-contract/{{dataValues.project_id}}">Click to Open Contract</a>
+                                <a href="/client-contract/{{project_id}}">Click to Open Contract</a>
                             </div>
                         </div>
                     </div>
@@ -126,23 +126,3 @@
         </main>
     </div>
 </div>
-<script>
-    const contractSigned = document.getElementById('contract-status');
-    const signatureDoc = document.getElementById('signature');
-
-    checkMark (contractSigned) => {
-    if (contractSigned) {
-        const contractSignatureEl = document.createElement('i');
-        contractSignatureEl.classList.add('material-icons small green');
-        contractSignatureEl.innerHTML = 'check_box';
-        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
-        removeItem(signatureDoc);
-    } else {
-        const contractSignatureEl = document.createElement('i');
-        contractSignatureEl.classList.add('material-icons small red');
-        contractSignatureEl.innerHTML = 'check_box_outline_blank';
-        contractSigned.parentNode.replaceChild(contractSignatureEl, contractSigned);
-    }
-    }
-    checkMark();
-</script>

@@ -143,7 +143,7 @@ router.post('/', (req, res) => {
       contract_signed_date: req.body.contract_signed_date,
       user_id: req.body.user_id,
       username: req.body.username,
-      user_email: req.body.user_email,
+      user_email: req.body.email,
       user_first_name: req.body.user_first_name,
       user_last_name: req.body.user_last_name
     })
