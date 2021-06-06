@@ -13,11 +13,18 @@ async function contractFormHandler(event) {
     const total_price_of_project = document.querySelector('#total_price_of_project').value.trim();
     const project_title = document.querySelector('#project_title').value.trim();
     const project_description = document.querySelector('#project_description').value.trim();
+    const services_rendered = document.querySelector('#services_rendered').value.trim();
     const fee_schedule = document.querySelector('#fee_schedule').value.trim();
     const user_first_name = document.querySelector('#user_first_name').value.trim();
     const user_last_name = document.querySelector('#user_last_name').value.trim();
-    const user_id = req.session.passport.user.user_id;
-    const username = req.session.passport.user._json.nickname;
+    const user_company_name = document.querySelector('#user_company_name').value.trim();
+    const user_billing_address = document.querySelector('#user_billing_address').value.trim();
+    const user_city = document.querySelector('#user_city').value.trim();
+    const user_zipcode = document.querySelector('#user_zipcode').value.trim();
+    const username = document.querySelector('#username').value.trim();
+    const user_id = document.querySelector('#user_id').value.trim();
+    const user_email = document.querySelector('#user_email').value.trim();
+
 
     const response = await fetch(`/api/projects/`, {
         method: 'POST',
@@ -34,11 +41,17 @@ async function contractFormHandler(event) {
             total_price_of_project,
             project_title,
             project_description,
+            services_rendered,
             fee_schedule,
             user_first_name,
             user_last_name,
+            user_email,
             user_id,
-            username
+            username,
+            user_company_name,
+            user_billing_address,
+            user_city,
+            user_zipcode
         }),
         headers: {
             'Content-Type': 'application/json'

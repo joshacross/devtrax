@@ -103,7 +103,11 @@ router.get('/login', (req, res) => {
 
 //Contracts Page 
 router.get('/contracts', (req, res) => {
-  res.render('contracts');
+  const userDataId = req.session.passport.user.user_id;
+  const userName = req.session.passport.user.displayName;
+  const userEmail = req.session.passport.user._json.email;
+  
+  res.render('contracts', {userDataId, userName, userEmail});
   return;
 });
 
@@ -179,6 +183,8 @@ router.get('/contracts', (req, res) => {
 
 router.get('/profile', (req, res) => {
   const userDataId = req.session.passport.user.user_id;
+  const userName = req.session.passport.user.displayName;
+  const userEmail = req.session.passport.user.emails.value;
   // Ping Database by session id to find projects.
   // If project doesn't exist, render profile page
   // If project exists, render dbProjectData 
@@ -226,7 +232,7 @@ router.get('/profile', (req, res) => {
   })
     .then(dbProjectData => {
       if (!dbProjectData) {
-        res.render('profile');
+        res.render('profile', { userDataId, userName, userEmail });
         return;
       } else {
       const projects = dbProjectData.map(project => project.get({ plain: true }));

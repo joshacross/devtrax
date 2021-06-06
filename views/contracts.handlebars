@@ -13,20 +13,13 @@
             <br>
 
             <div class="input-field col s6">
-              <input placeholder="" id="user_first_name" type="text" class="validate" required />
+              <input placeholder="" id="user_first_name" type="text" class="validate" value="{{user_first_name}}" required />
               <label for="user_first_name">First Name</label>
             </div>
 
             <div class="input-field col s6">
-              <input placeholder="" id="user_last_name" type="text" class="validate" required />
+              <input placeholder="" id="user_last_name" type="text" class="validate" value="{{user_last_name}}" required />
               <label for="user_last_name">Last Name</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field">
-              <input placeholder="" id="user_email" type="text" class="validate" required />
-              <label for="user_email">Email</label>
             </div>
           </div>
 
@@ -57,6 +50,11 @@
               <label for="user_zipcode">Zipcode</label>
             </div>
           </div>
+
+          <!--User Hidden Fields-->
+          <input id="user_id" type="hidden" value={{userDataId}} required />
+          <input id="username" type="hidden" value={{userName}} required />
+          <input id="user_email" type="hidden" value={{userEmail}} required />
 
           <br>
           <div class="row">
@@ -148,6 +146,13 @@
               <label for="project_description">Describe the project</label>
             </div>
           </div>
+          
+          <div class="row">
+            <div class="input-field">
+              <input placeholder="" id="services_rendered" type="text" class="validate" required />
+              <label for="services_rendered">Services Rendered</label>
+            </div>
+          </div>
 
           <div class="row">
             <div class="input-field">
@@ -171,4 +176,4 @@
   </br>
   </br>
 
-<script src="/javascript/contact.js"></script>
+<script src="/javascript/contract.js"></script>

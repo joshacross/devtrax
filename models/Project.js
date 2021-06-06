@@ -142,7 +142,6 @@ Project.init(
         },
         user_email: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         user_first_name: {
             type: DataTypes.STRING,
@@ -151,6 +150,18 @@ Project.init(
         user_last_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        user_company_name: {
+            type: DataTypes.STRING
+        },
+        user_billing_address: {
+            type: DataTypes.STRING
+        },
+        user_city: {
+            type: DataTypes.STRING
+        },
+        user_zipcode: {
+            type: DataTypes.STRING
         }
     },
     {

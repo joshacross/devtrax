@@ -145,7 +145,11 @@ router.post('/', (req, res) => {
       username: req.body.username,
       user_email: req.body.email,
       user_first_name: req.body.user_first_name,
-      user_last_name: req.body.user_last_name
+      user_last_name: req.body.user_last_name,
+      user_company_name: req.body.user_company_name,
+      user_billing_address: req.body.user_billing_address,
+      user_city: req.body.user_city,
+      user_zipcode: req.body.user_zipcode
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
