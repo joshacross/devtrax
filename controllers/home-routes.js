@@ -216,11 +216,11 @@ router.get('/profile', (req, res) => {
       'user_last_name',
       'created_at',
       'updated_at'
-    ]
+    ],
     // include: [
     //   {
-    //     model: User,
-    //     attributes: ['user_id', 'username', 'first_name', 'last_name']
+    //     model: Session,
+    //     attributes: [userData.user_id, userData.username, userData.email]
     //   }
     // ]
   })
