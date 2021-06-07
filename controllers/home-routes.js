@@ -120,7 +120,8 @@ router.get('/profile', (req, res, next) => {
           ]
         })
         .then((dbUserData => {
-        res.render('profile', { dbUserData });
+          const usersData = [dbUserData].map(users => users.get({ plain: true }));
+        res.render('profile', { usersData });
         return;
         }))
       } else {
@@ -145,12 +146,36 @@ router.get('/profile', (req, res, next) => {
 router.get('/contracts', (req, res) => {
   const { _raw, _json, ...userProfile } = req.user;
 
+  User.findOne({
+    where: {
+      auth_id: userProfile.id
+    },
+    attributes: [
+      'id',
+      'user_first_name',
+      'user_last_name',
+      'user_company_name',
+      'user_billing_address',
+      'user_city',
+      'user_zipcode',
+      'username',
+      'user_email',
+      'auth_id'
+    ]
+  })
+  .then((dbUserData => {
+  const usersData = [dbUserData].map(users => users.get({ plain: true }));
   const userDataId = userProfile.id;
   const userName = userProfile.displayName;
   const userEmail = req.session.passport.user._json.email;
   
-  res.render('contracts', { userDataId, userName, userEmail });
+  res.render('contracts', { usersData, userDataId, userName, userEmail });
   return;
+  }))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+    });
 });
 
 // get one user
