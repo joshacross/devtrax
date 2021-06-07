@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Project, User } = require('../models');
 // const db = require('../models');
-// const secured = require('../lib/middleware/secured');
+const secured = require('../utils/secured');
 const passport = require('passport');
 
 
@@ -37,7 +37,7 @@ router.get('/login', (req, res) => {
 
 
 //Welcome Page - Render if user does not exist. If they do exist render profile page.
-router.get('/welcome', (req, res, next) => {
+router.get('/welcome', secured(), (req, res, next) => {
   const { _raw, _json, ...userProfile } = req.user;
 
   User.findOne({
@@ -60,7 +60,21 @@ router.get('/welcome', (req, res, next) => {
   });
 });
 
-router.get('/profile', (req, res, next) => {
+// router.get('/:id', async (req, res) => {
+//   let user = await User.findOne({
+//       where: {
+//           user_id: req.body.user_id
+//       },
+//   });
+//   let projects = await Project.findAll({
+//       where: {
+//           user_id: req.body.user_id
+//       },
+//   })
+//   res.json({ user, projects });
+// });
+
+router.get('/profile', secured(), (req, res, next) => {
   const { _raw, _json, ...userProfile } = req.user;
 
   User.findOne({
@@ -143,7 +157,7 @@ router.get('/profile', (req, res, next) => {
 // Contracts Page 
 // Add info to page - at the top showing user's information that will be added to the contract.
 
-router.get('/contracts', (req, res) => {
+router.get('/contracts', secured(), (req, res) => {
   const { _raw, _json, ...userProfile } = req.user;
 
   User.findOne({
