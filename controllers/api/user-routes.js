@@ -51,15 +51,15 @@ router.get('/:id', async (req, res) => {
 router.post('/', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
-        user_first_name: req.body.first_name,
-        user_last_name: req.body.last_name,
+        user_first_name: req.body.user_first_name,
+        user_last_name: req.body.user_last_name,
         user_company_name: req.body.user_company_name,
         user_billing_address: req.body.user_billing_address,
         user_city: req.body.user_city,
         user_zipcode: req.body.user_zipcode,
-        user_email: req.body.email,
+        user_email: req.body.user_email,
         username: req.body.username,
-        user_id: req.body.user_id
+        auth_id: req.body.auth_id
     })
     .then(dbUserData => res.json(dbUserData))
         .catch(err => {

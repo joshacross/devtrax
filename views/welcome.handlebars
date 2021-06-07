@@ -20,7 +20,7 @@
         </div>
         <div class="col s6 m4">
           <div class="row">
-            <form class="col s12 user-form">
+            <form class="col s12 user-form" action="/profile">
               <div class="row">
                 <div class="input-field col s6">
                   <input id="user_first_name" type="text" class="validate">
@@ -54,7 +54,7 @@
                 </div>
               </div>
           <!--User Hidden Fields-->
-          <input id="user_id" type="hidden" value={{userDataId}} required />
+          <input id="auth_id" type="hidden" value={{userDataId}} required />
           <input id="username" type="hidden" value={{userName}} required />
           <input id="user_email" type="hidden" value={{userEmail}} required />
               <br><br>
