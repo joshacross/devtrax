@@ -1,0 +1,81 @@
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br><br>
+        <h5 class="center">Welcome To</h2>
+        <h1 class="header center black-text">Dev<span class="green-text">Trax</span></h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Get to work.</h5>
+        </div>
+                            <!--   Icon Section   -->
+        <div class="col s12 m4 center">
+            <div class="icon-block center">
+                <h2 class="center light-green-text">
+                <!-- <i class="material-icons">favorite_border</i> -->
+                <img src="assets/file-icon.png" width="90" height="90" />
+                </h2>
+                <h5 class="center">Simple and Easy</h5>
+
+                <p class="light">An app to automate your freelancing contracts and projects. Fill in your information below to be taken to your profile page.</p>
+            </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="row">
+            <form class="col s12 user-form">
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="user_first_name" type="text" class="validate">
+                  <label for="user_first_name">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="user_last_name" type="text" class="validate">
+                  <label for="user_last_name">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="user_company_name" type="text" class="validate">
+                  <label for="user_company_name">Company Name</label>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <input id="user_billing_address" type="text" class="validate">
+                  <label for="user_billing_address">Company Billing Address</label>
+                </div>
+                </div>
+                <div class="row">
+                <div class="input-field col s6">
+                  <input id="user_city" type="text" class="validate">
+                  <label for="user_city">City</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="user_zipcode" type="text" class="validate">
+                  <label for="user_zipcode">Zipcode</label>
+                </div>
+              </div>
+          <!--User Hidden Fields-->
+          <input id="user_id" type="hidden" value={{userDataId}} required />
+          <input id="username" type="hidden" value={{userName}} required />
+          <input id="user_email" type="hidden" value={{userEmail}} required />
+              <br><br>
+          </div>
+        </div>
+        <div class="row center">
+          <button type="submit" id="download-button" class="btn-large waves-effect waves-light green">Submit</button>
+        </div>
+        </form>
+        <br><br>
+
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-bottom: 20;">
+    <div class="container">
+      <div class="section">
+      </div>
+
+    </div>
+    <br><br>
+    </div>
+<script src="/javascript/user.js"></script>
