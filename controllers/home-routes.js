@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Project } = require('../models');
+const { User, Project } = require('../models');
 const passport = require('passport');
 require('dotenv').config();
 
@@ -18,7 +18,7 @@ router.get(
 // Home Page , if logged in go to user's profile, if not redirect to login
 router.get('/', (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/profile');
+    res.redirect('/welcome');
     return;
   }
   res.redirect('/login');
@@ -59,7 +59,7 @@ router.get('/login', (req, res) => {
     // if(user !exists){
     //   // post new user;
     // }
-    res.redirect('/profile');
+    res.redirect('/welcome');
     return;
 
   } else {
@@ -101,13 +101,38 @@ router.get('/login', (req, res) => {
 //   res.render('login');
 // })
 
+//Welcome Page - Render if user does not exist. If they do exist render profile page.
+router.get('/welcome', async (req, res) => {
+
+  let users = await User.findOne({
+    where: {
+      auth_id: req.session.passport.user.user_id
+    }
+  })
+  .then((dbUserData) => {
+    if (!dbUserData) {
+      const userDataId = req.session.passport.user.id;
+      const userName = req.session.passport.user.displayName;
+      const userEmail = req.session.passport.user._json.email;
+  
+      res.render('welcome', { userDataId, userName, userEmail });
+      return;
+    } else {
+    res.render('profile', { users });
+    return;
+    }
+  });
+});
+
 //Contracts Page 
+// Add info to page - at the top showing user's information that will be added to the contract.
+
 router.get('/contracts', (req, res) => {
-  const userDataId = req.session.passport.user.user_id;
+  const userDataId = req.session.passport.user.id;
   const userName = req.session.passport.user.displayName;
   const userEmail = req.session.passport.user._json.email;
   
-  res.render('contracts', {userDataId, userName, userEmail});
+  res.render('contracts', { userDataId, userName, userEmail });
   return;
 });
 
@@ -181,14 +206,18 @@ router.get('/contracts', (req, res) => {
 //   return;
 // });
 
-router.get('/profile', (req, res) => {
-  const userDataId = req.session.passport.user.user_id;
-  const userName = req.session.passport.user.displayName;
-  const userEmail = req.session.passport.user.emails.value;
-  // Ping Database by session id to find projects.
-  // If project doesn't exist, render profile page
-  // If project exists, render dbProjectData 
-  console.log(userDataId);
+router.get('/profile',  (req, res) => {
+  // const { userProfile } = req.user;
+  const user = req.session.passport.user;
+  const userDataId = req.session.passport.user.id;
+  // const userDataId = userProfile.id;
+  // // const userName = req.session.passport.user.displayName;
+  // // const userEmail = req.session.passport.user.emails.value;
+  // // Ping Database by session id to find projects.
+  // // If project doesn't exist, render profile page
+  // // If project exists, render dbProjectData 
+  // console.log(userDataId);
+  console.log(user);
   Project.findAll({
     where: {
       user_id: userDataId
@@ -232,7 +261,7 @@ router.get('/profile', (req, res) => {
   })
     .then(dbProjectData => {
       if (!dbProjectData) {
-        res.render('profile', { userDataId, userName, userEmail });
+        res.render('profile');
         return;
       } else {
       const projects = dbProjectData.map(project => project.get({ plain: true }));

@@ -3,74 +3,114 @@ const { User, Post } = require('../../models');
 
 const userdata = [
   {
-    first_name: 'josh',
-    last_name: 'cross',
+    user_first_name: 'josh',
+    user_last_name: 'cross',
     username: 'alesmonde0',
-    email: 'nwestnedge0@cbc.ca',
-    password: 'password123'
+    user_email: 'nwestnedge0@cbc.ca',
+    user_company_name: 'killajmgmt',
+    user_billing_address: '123 Authorization Drive',
+    user_city: 'nashville',
+    user_zipcode: '37204',
+    auth_id: 'Auth0|11234567890'
   },
   {
-    first_name: 'james',
-    last_name: 'cross',
-    username: 'jwilloughway1',
-    email: 'rmebes1@sogou.com',
-    password: 'password123'
+    user_first_name: 'j',
+    user_last_name: 'thomas',
+    username: 'jthomas1',
+    user_email: 'jthomas@bakerboards.com',
+    user_company_name: 'baker',
+    user_billing_address: '123 Cali way',
+    user_city: 'Orange County',
+    user_zipcode: '90210',
+    auth_id: 'Auth0|10234567890'
   },
   {
-    first_name: 'alex',
-    last_name: 'cross',
-    username: 'iboddam2',
-    email: 'cstoneman2@last.fm',
-    password: 'password123'
+    user_first_name: 'Gerard',
+    user_last_name: 'Butler',
+    username: 'Taken123',
+    user_email: 'Gerard@gbutler.com',
+    user_company_name: 'Gerard Butler, LLC',
+    user_billing_address: '90 Golden Globes Drive',
+    user_city: 'Los Angeles',
+    user_zipcode: '90210',
+    auth_id: 'Auth0|9234567890'
   },
   {
-    first_name: 'alexa',
-    last_name: 'cross',
-    username: 'dstanmer3',
-    email: 'ihellier3@goo.ne.jp',
-    password: 'password123'
+    user_first_name: 'Jesse',
+    user_last_name: 'James',
+    username: 'trainxrobber123',
+    user_email: 'jesse@jj.com',
+    user_company_name: 'Jesse James and the fantastic 5',
+    user_billing_address: 'unknown',
+    user_city: 'unknown',
+    user_zipcode: '00000',
+    auth_id: 'Auth0|8234567890'
   },
   {
-    first_name: 'alexis',
-    last_name: 'cross',
-    username: 'djiri4',
-    email: 'gmidgley4@weather.com',
-    password: 'password123'
+    user_first_name: 'Alex',
+    user_last_name: 'cross',
+    username: 'alexcinvestigations',
+    user_email: 'alex@alexcross.com',
+    user_company_name: 'Alex Cross Investigations, LLC',
+    user_billing_address: '123 Mystery Way',
+    user_city: 'Chicago',
+    user_zipcode: '60652',
+    auth_id: 'Auth0|7234567890'
   },
   {
-    first_name: 'alexandria',
-    last_name: 'cross',
-    username: 'msprague5',
-    email: 'larnout5@imdb.com',
-    password: 'password123'
+    user_first_name: 'Smokey',
+    user_last_name: 'Bear',
+    username: 'Smokey@smokeybear.com',
+    user_email: 'smokey@smokeybear.com',
+    user_company_name: 'Smokey Bear, LLC',
+    user_billing_address: '555 Fire Safety Lane',
+    user_city: 'Chicago',
+    user_zipcode: '60652',
+    auth_id: 'Auth0|6234567890'
   },
   {
-    first_name: 'xander',
-    last_name: 'cross',
-    username: 'mpergens6',
-    email: 'hnapleton6@feedburner.com',
-    password: 'password123'
+    user_first_name: 'Tommy',
+    user_last_name: 'Christopher',
+    username: 'tommyc',
+    user_email: 'tommy@tchristophers.com',
+    user_company_name: 'Tommy Christophers Rare Diamonds',
+    user_billing_address: '1000 Grand Court',
+    user_city: 'Emerald',
+    user_zipcode: '55555',
+    auth_id: 'Auth0|5234567890'
   },
   {
-    first_name: 'marco',
-    last_name: 'cross',
-    username: 'tpenniell7',
-    email: 'kperigo7@china.com.cn',
-    password: 'password123'
+    user_first_name: 'Jorge',
+    user_last_name: 'Limon',
+    username: 'jlimon',
+    user_email: 'jorge@limonauto.com',
+    user_company_name: 'Limon Auto, LLC',
+    user_billing_address: '44 4th Street',
+    user_city: 'nashville',
+    user_zipcode: '37204',
+    auth_id: 'Auth0|4234567890'
   },
   {
-    first_name: 'mera',
-    last_name: 'cross',
-    username: 'msabbins8',
-    email: 'lmongain8@google.ru',
-    password: 'password123'
+    user_first_name: 'Lana',
+    user_last_name: 'Del Ray',
+    username: 'Lanadelray',
+    user_email: 'lana@lanadelray.com',
+    user_company_name: 'Lana Del Ray and Friends',
+    user_billing_address: '123 Summertime Sadness Drive',
+    user_city: 'nashville',
+    user_zipcode: '37204',
+    auth_id: 'Auth0|3234567890'
   },
   {
-    first_name: 'lexy',
-    last_name: 'cross',
-    username: 'jmacarthur9',
-    email: 'bsteen9@epa.gov',
-    password: 'password123'
+    user_first_name: 'Havier',
+    user_last_name: 'Christopher',
+    username: 'Havierc',
+    user_email: 'havier@hc.com',
+    user_company_name: 'HC Board Shop',
+    user_billing_address: '40 Surfer Drive',
+    user_city: 'San Diego',
+    user_zipcode: '90010',
+    auth_id: 'Auth0|2234567890'
   }
 ];
 

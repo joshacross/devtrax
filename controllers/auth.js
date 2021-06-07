@@ -19,7 +19,7 @@
     scope: "openid email profile"
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("/welcome");
     // res.render('/');
   }
 );
@@ -32,7 +32,7 @@ router.get("/callback", (req, res, next) => {
     if (!user) {
       return res.redirect("/login");
     }
-    req.logIn(user, (err) => {
+    req.logIn(user, async (err) => {
       if (err) {
         return next(err);
       }
@@ -58,7 +58,7 @@ router.get("/callback", (req, res, next) => {
       //   res.render(dbUserData);
       //   });
       // });
-      res.redirect(returnTo || "/profile");
+      res.redirect(returnTo || "/welcome");
     });
   })(req, res, next);
 });
@@ -128,8 +128,9 @@ router.get("/callback", (req, res, next) => {
 // });
 
 router.get('/user', (req, res) => {
+  const userDataId = req.session.passport.user
   passport.authenticate('')
-  res.send(req.session.passport.user);
+  res.send(userDataId);
 })
 
 router.get("/logout", (req, res) => {

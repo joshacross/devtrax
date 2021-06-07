@@ -1,18 +1,18 @@
-// const User = require('./User');
+const User = require('./User');
 const Project = require('./Project');
 // // const Client = require('./Client');
 
 // // // define and create model associations
 
-// // Users have many projects
-// User.hasMany(Project, {
-//     foreignKey: 'auth'
-// });
+// Users have many projects
+User.hasMany(Project, {
+    foreignKey: 'user_id'
+});
 
-// Project.belongsTo(User, {
-//     foreignKey: 'auth',
-//     onDelete: 'SET NULL'
-// });
+Project.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'SET NULL'
+});
 
 // // // users have many clients
 // // User.hasMany(Client, {
@@ -35,4 +35,4 @@ const Project = require('./Project');
 // //     foreignKey: 'client_id'
 // // });
 
-module.exports = { Project };
+module.exports = { Project, User };

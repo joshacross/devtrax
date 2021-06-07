@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Project } = require('../../models');
+const { Project, User } = require('../../models');
 const sequelize = require('../../config/connection');
 // const withAuth = require('../../utils/auth');
 const { authenticate } = require('passport');
@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
         // define attributes
         attributes: [
           'project_id',
-          'project_url',
           'project_title',
           'project_description',
           'services_rendered',
@@ -31,24 +30,30 @@ router.get('/', (req, res) => {
           'contract_signed',
           'contract_created_date',
           'contract_signed_date',
-          'user_id',
-          'username',
-          'user_email',
-          'user_first_name',
-          'user_last_name',
           'created_at',
           'updated_at'
         ],
         // order projects based on the most recent project created_at date
-        order: [['created_at', 'DESC']]
+        order: [['created_at', 'DESC']],
         // JOIN to the user table using include
-        // include: [
-        //     //include client model
-        //     {
-        //         model: User,
-        //         attributes: ['user_id', 'username', 'first_name', 'last_name']
-        //     }
-        // ]
+        include: [
+            //include user model
+            {
+                model: User,
+                attributes: 
+                    [
+                      'user_id', 
+                      'username', 
+                      'user_first_name', 
+                      'user_last_name',
+                      'user_email',
+                      'auth_id',
+                      'company_name',
+                      'user_billing_address',
+                      'user_city',
+                      'user_zipcode']
+            }
+        ]
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
@@ -66,7 +71,6 @@ router.get('/:id', (req, res) => {
         // define attributes
         attributes: [
           'project_id',
-          'project_url',
           'project_title',
           'project_description',
           'services_rendered',
@@ -86,32 +90,32 @@ router.get('/:id', (req, res) => {
           'contract_signed',
           'contract_created_date',
           'contract_signed_date',
-          'user_id',
-          'username',
-          'user_email',
-          'user_first_name',
-          'user_last_name',
           'created_at',
           'updated_at'
         ],
         // order projects based on the most recent project created_at date
-        order: [['created_at', 'DESC']]
-                // JOIN to the user table using include
-        // include: [
-        //     //include client model
-        //     {
-        //         model: User,
-        //         attributes: ['user_id', 'username', 'first_name', 'last_name']
-        //     }
-        // ]
+        order: [['created_at', 'DESC']],
+        // JOIN to the user table using include
+        include: [
+            //include user model
+            {
+                model: User,
+                attributes: 
+                    [
+                      'user_id', 
+                      'username', 
+                      'user_first_name', 
+                      'user_last_name',
+                      'user_email',
+                      'auth_id',
+                      'company_name',
+                      'user_billing_address',
+                      'user_city',
+                      'user_zipcode']
+            }
+        ]
     })
-    .then(dbProjectData => {
-        if (!dbProjectData) {
-            res.status(404).json({ message: 'No project found with this id'});
-            return;
-        }
-        res.json(dbProjectData);
-    })
+    .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -141,15 +145,7 @@ router.post('/', (req, res) => {
       contract_signed: req.body.contract_signed,
       contract_created_date: req.body.contract_created_date,
       contract_signed_date: req.body.contract_signed_date,
-      user_id: req.body.user_id,
-      username: req.body.username,
-      user_email: req.body.email,
-      user_first_name: req.body.user_first_name,
-      user_last_name: req.body.user_last_name,
-      user_company_name: req.body.user_company_name,
-      user_billing_address: req.body.user_billing_address,
-      user_city: req.body.user_city,
-      user_zipcode: req.body.user_zipcode
+      user_id: req.body.user_id
     })
     .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
@@ -181,11 +177,7 @@ router.put('/:id', (req, res) => {
         contract_signed: req.body.contract_signed,
         contract_created_date: req.body.contract_created_date,
         contract_signed_date: req.body.contract_signed_date,
-        user_id: req.session.passport.user.user_id,
-        username: req.session.passport.user._json.nickname,
-        user_email: req.session.passport.user._json.email,
-        user_first_name: req.body.user_first_name,
-        user_last_name: req.body.user_last_name
+        user_id: req.body.user_id
       },
       {
         where: {

@@ -46,7 +46,7 @@ async function contractFormHandler(event) {
             user_first_name,
             user_last_name,
             user_email,
-            user_id,
+            auth_id,
             username,
             user_company_name,
             user_billing_address,

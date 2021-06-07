@@ -1,36 +1,36 @@
-// const router = require('express').Router();
-// const { User, Project } = require('../../models');
+const router = require('express').Router();
+const { User, Project } = require('../../models');
+const passport = require('passport');
 // const jwt = require('express-jwt');
 // const jwksRsa = require('jwks-rsa');
 
-// // GET /api/users
-// router.get('/', (req, res) => {
-//     // Access our User model and run .findAll() method
-//     User.findAll({
-//         attibutes: { exclude: ['password'] }
-//     })
-//         .then(dbUserData => res.json(dbUserData))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-// });
+// GET /api/users
+router.get('/', (req, res) => {
+    // Access our User model and run .findAll() method
+    User.findAll({
+        attibutes: { exclude: ['password'] }
+    })
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
-// //GET /api/users/1
-// router.get('/:id', async (req, res) => {
-//     let user = await User.findOne({
-//         attibutes: { exclude: ['password'] },
-//         where: {
-//             user_id: req.params.id
-//         },
-//     });
-//     let projects = await Project.findAll({
-//         where: {
-//             user_id: req.params.id
-//         },
-//     })
-//     res.json({ user, projects });
-// });
+//GET /api/users/1
+router.get('/:id', async (req, res) => {
+    let user = await User.findOne({
+        where: {
+            user_id: req.body.user_id
+        },
+    });
+    let projects = await Project.findAll({
+        where: {
+            user_id: req.body.user_id
+        },
+    })
+    res.json({ user, projects });
+});
 
 // const checkJwt = jwt({
 //     secret: jwksRsa.expressJwtSecret({
@@ -48,27 +48,25 @@
 
 // app.use(checkJwt);
 
-// router.post('/', (req, res) => {
-//     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-//     User.create({
-//         username: req.body.username,
-//         first_name: req.body.first_name,
-//         last_name: req.body.last_name,
-//         email: req.body.email,
-//         password: req.body.password,
-//         nickname: req.session.passport.user.nickname,
-//     })
-//     .then(dbUserData => {
-//         req.session.save(() => {
-//         req.session.user_id = req.session.passport.user.id;
-//         req.session.username = dbUserData.username;
-//         req.session.email = dbUserData.email;
-//         req.session.loggedIn = true;
-
-//         res.json(dbUserData);
-//         });
-//     });
-// });
+router.post('/', (req, res) => {
+    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+    User.create({
+        user_first_name: req.body.first_name,
+        user_last_name: req.body.last_name,
+        user_company_name: req.body.user_company_name,
+        user_billing_address: req.body.user_billing_address,
+        user_city: req.body.user_city,
+        user_zipcode: req.body.user_zipcode,
+        user_email: req.body.email,
+        username: req.body.username,
+        user_id: req.body.user_id
+    })
+    .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 // router.post('/login', (req, res) => {
 //     User.findOne({
@@ -101,16 +99,16 @@
 //     });
 // });
 
-router.post('/logout', (req, res) => {
-    if (req.session.loggedIn) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-    }
-    else {
-        res.status(404).end();
-    }
-});
+// router.post('/logout', (req, res) => {
+//     if (req.session.loggedIn) {
+//         req.session.destroy(() => {
+//             res.status(204).end();
+//         });
+//     }
+//     else {
+//         res.status(404).end();
+//     }
+// });
 
 // // PUT /api/users/1
 // router.put('/:id', (req, res) => {
@@ -156,4 +154,4 @@ router.post('/logout', (req, res) => {
 //         });
 // });
 
-// module.exports = router;
+module.exports = router;
